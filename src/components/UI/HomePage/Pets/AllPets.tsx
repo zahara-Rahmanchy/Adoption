@@ -53,7 +53,7 @@ const AllPets = async () => {
 
       <Grid
         container
-        rowSpacing={1}
+        rowSpacing={5}
         columnSpacing={{xs: 1, sm: 2, md: 3}}
         justifyContent="center"
         marginTop="10px"
@@ -192,6 +192,7 @@ const AllPets = async () => {
                     backgroundcolor: "#f7d588",
                     // margin: "6px",
                   }}
+                  // onClick={() => handleViewPetDetails(pet.id)}
                 >
                   Learn More
                 </Button>

@@ -1,7 +1,90 @@
+import {
+  Box,
+  Button,
+  ButtonBase,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
 const LoginPage = () => {
-  return <div>Login</div>;
+  return (
+    <Container>
+      <Stack
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: 600,
+            width: "100%",
+            borderRadius: "5px",
+            boxShadow: 1,
+            backgroundColor: "secondary.light",
+            textAlign: "center",
+            paddingTop: "15px",
+          }}
+        >
+          <Typography
+            textAlign="center"
+            variant="h6"
+            color="primary.main"
+            component="span"
+            fontWeight={"bold"}
+          >
+            Please <Box component="span">Log</Box>
+            <Box color="black" component="span">
+              in To Use!
+            </Box>
+          </Typography>
+          <Grid
+            container
+            spacing={2}
+            gap={2}
+            px={4}
+            py={5}
+            width="100%"
+            justifyContent={"center"}
+          >
+            <Grid item xs={12} md={12}>
+              <TextField
+                id="standard-basic"
+                label="Email"
+                variant="standard"
+                fullWidth={true}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                id="standard-basic"
+                label="Password"
+                variant="standard"
+                type="password"
+                fullWidth={true}
+              />
+            </Grid>
+            <Grid item xs={12} textAlign="center">
+              <Button
+                // textAlign="center"
+                sx={{
+                  width: "200px",
+                  textAlign: "center",
+                }}
+              >
+                Login
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Stack>
+    </Container>
+  );
 };
 
 export default LoginPage;

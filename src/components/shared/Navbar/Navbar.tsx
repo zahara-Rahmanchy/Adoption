@@ -20,8 +20,20 @@ const Navbar = () => {
           <Typography component={Link} href="/aboutUs">
             About Us
           </Typography>
-          <Button component={Link} href="/Login">
+          <Button
+            component={Link}
+            href="/Login"
+            variant="outlined"
+            // color="secondary"
+            sx={{
+              color: "#f7ad1b",
+              borderColor: "#f7ad1b",
+            }}
+          >
             Login
+          </Button>
+          <Button component={Link} href="/Register">
+            Register
           </Button>
         </Stack>
       </Stack>

@@ -7,7 +7,12 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <Box bgcolor="primary.main" py="50px" marginTop="100px">
+    <Box
+      bgcolor="primary.main"
+      py="50px"
+      marginTop="100px"
+      marginBottom={"0px"}
+    >
       <Grid
         container
         rowSpacing={3}
