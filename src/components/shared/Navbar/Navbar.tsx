@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <Container>
+    <Container sx={{width: "100%", background: "white"}}>
       <Stack direction={"row"} justifyContent="space-between" py={4}>
         <Logo />
         <Stack

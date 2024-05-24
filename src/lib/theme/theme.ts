@@ -10,6 +10,8 @@ export const theme = createTheme({
     secondary: {
       // main: "#f7e1af",
       main: "#f7d588",
+      light: "#fff4d9",
+      dark: "#f7ad1b",
       // main: "#ffe19e",
     },
   },
@@ -24,6 +26,16 @@ export const theme = createTheme({
           width: "95px",
           borderRadius: "40px",
         },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          justifyContent: "center",
+        },
+        // button: {
+        //   fontSize: "13px",
+        // },
       },
     },
   },
