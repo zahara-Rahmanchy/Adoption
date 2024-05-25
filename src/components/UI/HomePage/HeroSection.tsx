@@ -39,6 +39,7 @@ const HeroSection = () => {
         >
           <Box
             sx={{
+              display: {xs: "none", md: "none", lg: "block"},
               position: "absolute",
               right: "440px",
               bottom: "110px",
@@ -53,7 +54,11 @@ const HeroSection = () => {
             />
           </Box>
 
-          <Box>
+          <Box
+            sx={{
+              display: {xs: "none", md: "none", lg: "block"},
+            }}
+          >
             {" "}
             <Image
               src="https://img.freepik.com/free-vector/cheerful-puppies-wearing-collars-illustration_1308-162836.jpg?t=st=1716472596~exp=1716476196~hmac=040ff0ec1e2844acebfc1f0a2c708d20e09ea3cd4fdf47e8180775d9a37999cd&w=740"

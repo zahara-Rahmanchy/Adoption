@@ -1,11 +1,11 @@
 "use server";
-type RegisterData = {
+export type LoginInputs = {
   name: string;
   email: string;
   password: string;
 };
-const RegisterUser = async (userData: RegisterData) => {
-  const res = await fetch(`${process.env.BACKEND_URL}/register`, {
+export const LoginUser = async (userData: LoginInputs) => {
+  const res = await fetch(`${process.env.BACKEND_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,5 +16,3 @@ const RegisterUser = async (userData: RegisterData) => {
   const userInfo = await res.json();
   return userInfo;
 };
-
-export default RegisterUser;
