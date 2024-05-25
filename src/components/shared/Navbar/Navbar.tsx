@@ -3,12 +3,19 @@ import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import React from "react";
 import Logo from "./Logo";
 import Link from "next/link";
-import {getUserInfo} from "@/services/auth.services";
+import {getUserInfo, removeUser} from "@/services/auth.services";
 import {userInfo} from "os";
+import {useRouter} from "next/navigation";
+import {toast} from "sonner";
 
 const Navbar = () => {
   const userData: any = getUserInfo();
-  console.log("userdata", userData);
+  const router = useRouter();
+  const handleLogout = () => {
+    removeUser();
+    router.refresh();
+    toast.success("Logged Out!");
+  };
   return (
     <Container sx={{width: "100%", background: "white"}}>
       <Stack
@@ -30,7 +37,12 @@ const Navbar = () => {
             About Us
           </Typography>
           {userData?.id ? (
-            <Button sx={{backgroundColor: "secondary.dark"}}>Logout</Button>
+            <Button
+              sx={{backgroundColor: "secondary.dark"}}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           ) : (
             <>
               <Button

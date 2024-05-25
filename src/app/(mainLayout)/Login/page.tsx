@@ -36,6 +36,7 @@ const LoginPage = () => {
         storeUserInfo(res?.data?.token);
 
         router.push("/");
+        router.refresh();
       }
     } catch (err) {
       console.log(err);
