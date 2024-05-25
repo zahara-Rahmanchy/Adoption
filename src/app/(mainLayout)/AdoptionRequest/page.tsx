@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -8,9 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
-
-const LoginPage = () => {
+const AdoptionPage = () => {
   return (
     <Container>
       <Stack
@@ -28,7 +27,7 @@ const LoginPage = () => {
             boxShadow: 1,
             backgroundColor: "secondary.light",
             textAlign: "center",
-            paddingTop: "15px",
+            paddingTop: "25px",
           }}
         >
           <Typography
@@ -38,9 +37,9 @@ const LoginPage = () => {
             component="span"
             fontWeight={"bold"}
           >
-            Please <Box component="span">Log</Box>
-            <Box color="black" component="span">
-              in To Use!
+            Please Reg
+            <Box component="span" color="secondary.dark">
+              ister To Adopt
             </Box>
           </Typography>
           <Grid
@@ -54,6 +53,16 @@ const LoginPage = () => {
           >
             <Grid item xs={12} md={12}>
               <TextField
+                id="standard-basic"
+                type="text"
+                label="Username"
+                variant="standard"
+                fullWidth={true}
+              />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField
+                type="text"
                 id="standard-basic"
                 label="Email"
                 variant="standard"
@@ -70,22 +79,31 @@ const LoginPage = () => {
                 fullWidth={true}
               />
             </Grid>
-            <Grid item xs={12} textAlign="center"></Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="standard-basic"
+                label="Confirm Password"
+                variant="standard"
+                type="password"
+                fullWidth={true}
+              />
+            </Grid>
+            <Grid item xs={12} textAlign="center">
+              <Button
+                sx={{
+                  width: "200px",
+                  textAlign: "center",
+                  backgroundColor: "secondary.dark",
+                }}
+              >
+                Register
+              </Button>
+            </Grid>
           </Grid>
-          <Button
-            // textAlign="center"
-            sx={{
-              width: "200px",
-              textAlign: "center",
-            }}
-            type="submit"
-          >
-            Login
-          </Button>
         </Box>
       </Stack>
     </Container>
   );
 };
 
-export default LoginPage;
+export default AdoptionPage;

@@ -27,7 +27,7 @@ const HeroSection = () => {
             loyal companion, we have the perfect pet waiting for you. Join us in
             giving these animals a second chance at happiness and a forever home
           </Typography>
-          <Button color="primary">Adopt</Button>
+          <Button color="primary">Explore</Button>
         </Box>
         <Box
           bgcolor={blue}
