@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -6,32 +7,96 @@ import {
   CardContent,
   CardMedia,
   Container,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
-const AllPets = async () => {
-  const res = await fetch("https://assignment-8-cyan.vercel.app/api/pets", {
-    cache: "no-store",
-  });
-  //  destructuring the data and naming as pets
-  const {data: pets} = await res.json();
+import Image from "next/image";
+import ExtractSpecialNeeds from "./ExtractSpecialNeeds";
+import {useRouter} from "next/navigation";
+
+const AllPets = () => {
+  const router = useRouter();
+  const [pets, setPets] = useState([]);
+  const [specialNeedsArray, setSpecialNeedsArray] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>();
+  const [size, setSize] = useState("");
+  const [gender, setGender] = useState("");
+  const [specialNeeds, setSpecialNeeds] = useState("");
+
+  const handleReset = () => {
+    setGender("");
+    setSearchTerm("");
+    setSize("");
+    setSpecialNeeds("");
+  };
+  const handleFilterSize = (event: SelectChangeEvent) => {
+    setSize(event.target.value);
+  };
+
+  const handleFilterGender = (event: SelectChangeEvent) => {
+    setGender(event.target.value);
+  };
+  const handleFilterNeeds = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
+    setSpecialNeeds(event.target.value);
+  };
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      const query = new URLSearchParams();
+      if (searchTerm) query.append("searchTerm", searchTerm);
+      if (gender) query.append("gender", gender);
+      if (size) query.append("size", size);
+      if (specialNeeds) query.append("specialNeeds", specialNeeds);
+      console.log(query.toString());
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/pets?${query.toString()}`,
+          {
+            cache: "no-store",
+          }
+        );
+        //  destructuring the data and naming as pets
+        const {data} = await res.json();
+        setPets(data);
+        // const specialNeedsList = new Set<string>();
+        // data.forEach((pet: any) => {
+        //   console.log("pet: ", pet);
+        //   if (pet.specialNeeds && pet.specialNeeds.length > 0) {
+        //     console.log("petSpe: ", pet.specialNeeds);
+        //     pet.specialNeeds.forEach((need: string) => {
+        //       console.log("needt: ", need);
+        //       specialNeedsList.add(need);
+        //     });
+        //   }
+        // });
+        const specialNeedsList = await ExtractSpecialNeeds();
+        setSpecialNeedsArray(specialNeedsList);
+        console.log("specialNeedsList: ", specialNeedsList);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPets();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, gender, size, specialNeeds]);
+  console.log("pets: ", pets);
+  console.log("needs: ", specialNeedsArray);
 
   return (
-    // <Box
-    //   sx={{
-    //     padding: "50px",
-    //     marginTop: "180px",
-    //     backgroundColor: "secondary.light",
-    //     zIndex: 1,
-    //     clipPath: "polygon(90px 10px,100% 2%,100% 100%,0 100%)",
-    //   }}
-    // >
     <Container
       sx={{
-        padding: "50px",
-        marginTop: "180px",
+        // padding: "50px",
+        marginTop: "100px",
         // backgroundColor: "#F7D588",
         // clipPath: "polygon(0 0,100% 2%,100% 100%,0 100%)",
       }}
@@ -50,14 +115,73 @@ const AllPets = async () => {
           Meet Your Future Furry Companion!
         </Box>
       </Typography>
-
-      <Grid
-        container
-        rowSpacing={5}
-        columnSpacing={{xs: 1, sm: 2, md: 3}}
-        justifyContent="center"
-        marginTop="10px"
+      <Box
+        display={"flex"}
+        flexDirection={{xs: "column", md: "row", lg: "row"}}
+        justifyContent="space-between"
       >
+        <TextField
+          sx={{
+            borderRadius: "50%",
+
+            color: "primary.main",
+            borderColor: "primary.main",
+          }}
+          onChange={e => setSearchTerm(e.target.value)}
+          id="outlined-basic"
+          label="Search"
+          variant="standard"
+        />
+        <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+          <InputLabel id="demo-simple-select-label">Size</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={size}
+            label="Size"
+            onChange={handleFilterSize}
+          >
+            <MenuItem value={"Large"}>Large</MenuItem>
+            <MenuItem value={"Medium"}>Medium</MenuItem>
+            <MenuItem value={"Small"}>Small</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+          <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={gender}
+            label="Gender"
+            onChange={handleFilterGender}
+          >
+            <MenuItem value={"Female"}>Female</MenuItem>
+            <MenuItem value={"Male"}>Male</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+          <InputLabel id="demo-simple-select-label">Special Needs</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={specialNeeds}
+            label="Special Needs"
+            onChange={handleFilterNeeds}
+          >
+            <MenuItem value={"disabled"}></MenuItem>
+            {specialNeedsArray.map((need: string) => (
+              <MenuItem value={need} key={need}>
+                {need}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Button color="secondary" onClick={handleReset}>
+          Reset
+        </Button>
+      </Box>
+
+      <Grid container rowSpacing={5} justifyContent="center" marginTop="10px">
         {pets.map((pet: any) => (
           <Grid
             key={pet.id}
@@ -74,16 +198,27 @@ const AllPets = async () => {
                 maxWidth: 345,
                 justifyContent: "center",
                 textAlign: "center",
-                height: 410,
+                maxHeight: "fit-content",
+                height: 510,
                 backgroundColor: "white",
-                // backgroundColor: "secondary.main",
               }}
             >
               <CardMedia
-                sx={{height: 140}}
-                image="/static/images/cards/contemplative-reptile.jpg"
-                title="green iguana"
-              />
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "10px",
+                }}
+              >
+                <Image
+                  src={pet.image}
+                  alt={`${pet.species} image`}
+                  objectFit="cover"
+                  width={300}
+                  height={0}
+                />
+                {/* title={pet.species + "img"} */}
+              </CardMedia>
               <CardContent>
                 <Box
                   display="flex"
@@ -126,7 +261,7 @@ const AllPets = async () => {
                     gutterBottom
                     variant="body1"
                     component="div"
-                    color="black"
+                    // color="black"
                     sx={{
                       fontSize: "14px",
                     }}
@@ -148,7 +283,29 @@ const AllPets = async () => {
                     gutterBottom
                     variant="body1"
                     component="div"
-                    color="black"
+                    // color="black"
+                    sx={{
+                      fontSize: "14px",
+                    }}
+                  >
+                    <Box
+                      component="span"
+                      // color="#865C97"
+                      sx={{
+                        fontSize: "14px",
+                      }}
+                      color="secondary.dark"
+                    >
+                      Breed:
+                    </Box>
+                    {"   "}
+                    {pet.breed}
+                  </Typography>
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    component="div"
+                    // color="black"
                     sx={{
                       fontSize: "15px",
                     }}
@@ -166,10 +323,10 @@ const AllPets = async () => {
                     {pet.age}
                   </Typography>
                 </Box>
-
+                <hr />
                 <Typography
                   variant="body1"
-                  sx={{fontSize: "13px"}}
+                  sx={{fontSize: "13px", my: 1}}
                   color="body1"
                 >
                   {pet.description}
@@ -190,7 +347,7 @@ const AllPets = async () => {
                     width: "110px",
                     fontSize: "10px",
                     backgroundcolor: "#f7d588",
-                    // margin: "6px",
+                    marginBottom: 2,
                   }}
                   // onClick={() => handleViewPetDetails(pet.id)}
                 >
