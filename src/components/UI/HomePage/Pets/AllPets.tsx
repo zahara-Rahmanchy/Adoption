@@ -21,6 +21,7 @@ import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import Image from "next/image";
 import ExtractSpecialNeeds from "./ExtractSpecialNeeds";
 import {useRouter} from "next/navigation";
+import Link from "next/link";
 
 const AllPets = () => {
   const router = useRouter();
@@ -61,23 +62,15 @@ const AllPets = () => {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/pets?${query.toString()}`,
           {
-            cache: "no-store",
+            next: {
+              revalidate: 30,
+            },
           }
         );
         //  destructuring the data and naming as pets
         const {data} = await res.json();
         setPets(data);
-        // const specialNeedsList = new Set<string>();
-        // data.forEach((pet: any) => {
-        //   console.log("pet: ", pet);
-        //   if (pet.specialNeeds && pet.specialNeeds.length > 0) {
-        //     console.log("petSpe: ", pet.specialNeeds);
-        //     pet.specialNeeds.forEach((need: string) => {
-        //       console.log("needt: ", need);
-        //       specialNeedsList.add(need);
-        //     });
-        //   }
-        // });
+
         const specialNeedsList = await ExtractSpecialNeeds();
         setSpecialNeedsArray(specialNeedsList);
         console.log("specialNeedsList: ", specialNeedsList);
@@ -187,7 +180,7 @@ const AllPets = () => {
             key={pet.id}
             item
             xs={12}
-            md={6}
+            sm={6}
             lg={4}
             textAlign={"center"}
             justifyContent={"center"}
@@ -339,20 +332,21 @@ const AllPets = () => {
                   justifyContent: "center",
                 }}
               >
-                <Button
-                  variant="contained"
-                  // color="primary.main"
-                  sx={{
-                    height: "30px",
-                    width: "110px",
-                    fontSize: "10px",
-                    backgroundcolor: "#f7d588",
-                    marginBottom: 2,
-                  }}
-                  // onClick={() => handleViewPetDetails(pet.id)}
-                >
-                  Learn More
-                </Button>
+                <Link href={`PetPortfolio/${pet.id}`}>
+                  <Button
+                    variant="contained"
+                    // color="primary.main"
+                    sx={{
+                      height: "30px",
+                      width: "110px",
+                      fontSize: "10px",
+                      backgroundcolor: "#f7d588",
+                      marginBottom: 2,
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </CardActions>
             </Card>
           </Grid>

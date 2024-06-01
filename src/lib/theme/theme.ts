@@ -40,12 +40,12 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Roboto,Arial,sans-serif",
+    fontFamily: "Homeja,Roboto,Arial,sans-serif",
     h1: {
       fontFamily: "Homeja,sans-serif",
       fontWeight: "700",
       fontSize: "80px",
-      lineHeight: "96px",
+      // lineHeight: "96px",
       color: "#252525",
     },
     body1: {
@@ -53,6 +53,10 @@ export const theme = createTheme({
       fontWeight: "500",
       size: "17px",
       color: "#7a7a7a",
+    },
+    body2: {
+      fontFamily: "Homeja,sans-serif",
+      color: "#252525",
     },
   },
 });
