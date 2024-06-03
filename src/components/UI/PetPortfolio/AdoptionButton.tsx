@@ -1,3 +1,4 @@
+"use client";
 import {IPetData} from "@/interfaces/PetInterface";
 import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
 import {blueGrey} from "@mui/material/colors";
@@ -37,16 +38,15 @@ const AdoptionButton = ({id}: {id: string}) => {
                 }}
               >
                 {" "}
-                <Typography
+                <Box
                   my="100px"
                   color="secondary.light"
-                  variant="h1"
                   component={"span"}
                   fontWeight={"bold"}
-                  fontSize={"25px"}
+                  fontSize={"30px"}
                 >
                   Click here to Adopt Me!
-                </Typography>
+                </Box>
               </Button>
             </Link>
           </Stack>

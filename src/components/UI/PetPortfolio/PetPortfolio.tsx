@@ -10,14 +10,7 @@ import {useRouter} from "next/navigation";
 
 const PetPortfolio = ({pet}: {pet: IPetData}) => {
   console.log("data from ui: ", pet);
-  // const router = useRouter();
-  // const handleAdoption = () => {
-  //   router.push({
-  //     pathname: `/AdoptionRequest/${pet.id}`,
-  //     query: {id},
-  //     state: {pet},
-  //   });
-  // };
+
   return (
     <Container>
       <Grid
@@ -40,12 +33,12 @@ const PetPortfolio = ({pet}: {pet: IPetData}) => {
               alt={""}
               width="500"
               height="100"
-              objectFit="cover"
               style={{
                 padding: "6px",
                 borderColor: "#865C97",
                 borderWidth: "3px",
                 borderRadius: "50%",
+                objectFit: "cover",
               }}
             />
           </Box>

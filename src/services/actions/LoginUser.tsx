@@ -5,7 +5,7 @@ export type LoginInputs = {
   password: string;
 };
 export const LoginUser = async (userData: LoginInputs) => {
-  const res = await fetch(`${process.env.BACKEND_URL}/login`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

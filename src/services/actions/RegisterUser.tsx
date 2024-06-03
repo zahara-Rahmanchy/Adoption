@@ -5,7 +5,7 @@ type RegisterData = {
   password: string;
 };
 const RegisterUser = async (userData: RegisterData) => {
-  const res = await fetch(`${process.env.BACKEND_URL}/register`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

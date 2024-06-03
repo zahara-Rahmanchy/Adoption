@@ -10,32 +10,48 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
-import React, {useEffect, useState} from "react";
-import {toast} from "sonner";
-import {Form, SubmitHandler, useForm} from "react-hook-form";
-import AdoptRequest from "@/services/actions/AdoptRequest";
+import React, {useState} from "react";
 
-import {petId} from "../../PetPortfolio/[petId]/page";
+import {SubmitHandler, useForm} from "react-hook-form";
+import AdoptRequest, {AdoptionData} from "@/services/actions/AdoptRequest";
+import {petId} from "@/constants/PetId";
+import {toast} from "sonner";
+import {getFromLocalStorage} from "@/utils/local-storage";
+import {getUserInfo} from "@/services/auth.services";
+
 const AdoptionPage = ({params}: petId) => {
-  // const router = useRouter();
-  console.log(params.petId);
+  const accessToken = getFromLocalStorage("accessToken");
+  const userData: any = getUserInfo();
+
   const [agreeConditions, setAgreeConditions] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: {errors},
   } = useForm<any>();
-  const password = watch("password");
+
   const onSubmit: SubmitHandler<any> = async data => {
-    console.log(data);
-    const {conpassword, ...userInfo} = data;
-    console.log(userInfo);
+    // console.log(data);
+    const {petOwnershipExperience, ...userInfo} = data;
+    const petdata = {
+      petId: params.petId,
+      petOwnershipExperience,
+    };
+    // console.log(petdata);
     try {
-      const res = await AdoptRequest(userInfo);
+      const res = await AdoptRequest(
+        petdata as AdoptionData,
+        String(accessToken)
+      );
       console.log(res);
-      if (res?.data?.id) {
+      // if (res?.data?.success === false) {
+      //   console.log(res?.message);
+      //   toast.error(res?.message);
+      // }
+      if (res?.data) {
         toast.success(res?.message);
+        reset();
         //   router.push("/Login");
       }
     } catch (err) {
@@ -70,9 +86,9 @@ const AdoptionPage = ({params}: petId) => {
             component="span"
             fontWeight={"bold"}
           >
-            Make an
+            Make an Adopt
             <Box component="span" color="secondary.dark">
-              Adoption Request
+              ion Request
             </Box>
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,31 +102,20 @@ const AdoptionPage = ({params}: petId) => {
               justifyContent={"center"}
             >
               <Grid item xs={12} md={12}>
-                {/* <TextField
-                  aria-readonly
-                  id="standard-basic"
-                  type="text"
-                  label="Name"
-                  defaultValue={pet.name}
-                  variant="standard"
-                  fullWidth={true}
-                  {...register("name")}
-                /> */}
-              </Grid>
-              <Grid item xs={12} md={12}>
                 <TextField
                   type="text"
-                  id="standard-basic"
+                  id="email"
                   label="Email"
                   variant="standard"
                   fullWidth={true}
+                  defaultValue={userData?.email}
                   {...register("email")}
                 />
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
-                  id="standard-basic"
+                  id="contactNumber"
                   label="Contact Number"
                   variant="standard"
                   type="text"
@@ -120,10 +125,10 @@ const AdoptionPage = ({params}: petId) => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  id="standard-basic"
+                  id="petOwnershipExperience"
                   label="Additonal Information ( Previous Ownership Experience )"
                   variant="standard"
-                  type="textfield"
+                  type="text"
                   fullWidth={true}
                   {...register("petOwnershipExperience")}
                 />

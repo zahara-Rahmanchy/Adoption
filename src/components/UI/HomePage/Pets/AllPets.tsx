@@ -110,7 +110,7 @@ const AllPets = () => {
       </Typography>
       <Box
         display={"flex"}
-        flexDirection={{xs: "column", md: "row", lg: "row"}}
+        flexDirection={{xs: "column", sm: "row", lg: "row"}}
         justifyContent="space-between"
       >
         <TextField
@@ -119,6 +119,8 @@ const AllPets = () => {
 
             color: "primary.main",
             borderColor: "primary.main",
+            m: 1,
+            minWidth: 130,
           }}
           onChange={e => setSearchTerm(e.target.value)}
           id="outlined-basic"
@@ -169,7 +171,11 @@ const AllPets = () => {
             ))}
           </Select>
         </FormControl>
-        <Button color="secondary" onClick={handleReset}>
+        <Button
+          sx={{m: 1, minWidth: 130}}
+          color="secondary"
+          onClick={handleReset}
+        >
           Reset
         </Button>
       </Box>
@@ -192,7 +198,8 @@ const AllPets = () => {
                 justifyContent: "center",
                 textAlign: "center",
                 maxHeight: "fit-content",
-                height: 510,
+                height: 500,
+
                 backgroundColor: "white",
               }}
             >
@@ -206,9 +213,9 @@ const AllPets = () => {
                 <Image
                   src={pet.image}
                   alt={`${pet.species} image`}
-                  objectFit="cover"
                   width={300}
                   height={0}
+                  style={{objectFit: "cover"}}
                 />
                 {/* title={pet.species + "img"} */}
               </CardMedia>
@@ -249,6 +256,7 @@ const AllPets = () => {
                   justifyContent="space-between"
                   alignItems="center"
                   px="10px"
+                  marginTop={4}
                 >
                   <Typography
                     gutterBottom

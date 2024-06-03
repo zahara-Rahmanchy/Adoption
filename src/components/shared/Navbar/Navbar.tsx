@@ -4,9 +4,10 @@ import React from "react";
 import Logo from "./Logo";
 import Link from "next/link";
 import {getUserInfo, removeUser} from "@/services/auth.services";
-import {userInfo} from "os";
+
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
+import {AccountCircle} from "@mui/icons-material";
 
 const Navbar = () => {
   const userData: any = getUserInfo();
@@ -37,12 +38,26 @@ const Navbar = () => {
             About Us
           </Typography>
           {userData?.id ? (
-            <Button
-              sx={{backgroundColor: "secondary.dark"}}
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
+            <>
+              <Link href={"/MyProfile"}>
+                <AccountCircle
+                  fontSize="large"
+                  sx={{
+                    borderWidth: "2px",
+                    borderRadius: "50%",
+                    padding: "1px",
+                    borderColor: "black",
+                    color: "#865C97",
+                  }}
+                />
+              </Link>
+              <Button
+                sx={{backgroundColor: "secondary.dark"}}
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <>
               <Button

@@ -93,8 +93,15 @@ const RegisterPage = () => {
                   label="Username"
                   variant="standard"
                   fullWidth={true}
-                  {...register("name")}
+                  {...register("name", {
+                    required: "Name is required",
+                  })}
                 />
+                {errors.name && (
+                  <span className="text-red-500 text-xs m-1">
+                    {errors.name.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={12} md={12}>
                 <TextField
@@ -103,8 +110,15 @@ const RegisterPage = () => {
                   label="Email"
                   variant="standard"
                   fullWidth={true}
-                  {...register("email")}
+                  {...register("email", {
+                    required: "Email is required!",
+                  })}
                 />
+                {errors.email && (
+                  <span className="text-red-500 text-xs m-1">
+                    {errors.email.message}
+                  </span>
+                )}
               </Grid>
 
               <Grid item xs={12}>
@@ -114,8 +128,15 @@ const RegisterPage = () => {
                   variant="standard"
                   type="password"
                   fullWidth={true}
-                  {...register("password")}
+                  {...register("password", {
+                    required: "Password is required!",
+                  })}
                 />
+                {errors.password && (
+                  <span className="text-red-500 text-xs m-1">
+                    {errors.password.message}
+                  </span>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField

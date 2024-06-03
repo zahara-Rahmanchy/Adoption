@@ -1,11 +1,10 @@
 "use client";
-import {LoginInputs, LoginUser} from "@/services/actions/LoginUser";
-import {storeUserInfo} from "@/services/auth.services";
+import {User} from "@/app/(mainLayout)/MyProfile/page";
+import EditUserProfile from "@/services/actions/EditUserProfile";
 import {
   Backdrop,
   Box,
   Button,
-  ButtonBase,
   CircularProgress,
   Container,
   Grid,
@@ -14,31 +13,41 @@ import {
   Typography,
 } from "@mui/material";
 import {useRouter} from "next/navigation";
-import React, {useState} from "react";
+
+import React, {Dispatch, FC, SetStateAction, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {toast} from "sonner";
 
-const LoginPage = () => {
+interface props {
+  accessToken: string;
+  updateProfile: Dispatch<SetStateAction<User>>;
+}
+const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: {errors},
-  } = useForm<LoginInputs>();
+  } = useForm<any>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = async data => {
+  const onSubmit: SubmitHandler<any> = async data => {
     setLoading(true);
     console.log(data);
 
-    try {
-      const res = await LoginUser(data);
-      console.log(res);
-      if (res?.data?.token) {
-        storeUserInfo(res?.data?.token);
+    for (let key in data) {
+      if (data[key] === "" || data[key] === undefined || data[key] === null)
+        delete data[key];
+    }
 
-        router.push("/");
-        router.refresh();
+    console.log("Sanitized", data);
+    try {
+      const res = await EditUserProfile(data, accessToken);
+      console.log(res);
+      if (res?.data?.id) {
+        // this part is used so that updated data is visible on the page
+        // without reload
+        updateProfile(res.data as User);
         toast.success(res?.message);
       }
     } catch (err) {
@@ -67,8 +76,8 @@ const LoginPage = () => {
             maxWidth: 600,
             width: "100%",
             borderRadius: "5px",
-            boxShadow: 1,
-            backgroundColor: "secondary.light",
+            // boxShadow: 1,
+            // backgroundColor: "secondary.light",
             textAlign: "center",
             paddingTop: "15px",
           }}
@@ -80,9 +89,9 @@ const LoginPage = () => {
             component="span"
             fontWeight={"bold"}
           >
-            Please <Box component="span">Log</Box>
+            Edit <Box component="span"></Box>
             <Box color="black" component="span">
-              in To Use!
+              Profile
             </Box>
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,36 +107,32 @@ const LoginPage = () => {
               <Grid item xs={12} md={12}>
                 <TextField
                   id="standard-basic"
-                  label="Email"
+                  label="Username"
                   variant="standard"
                   fullWidth={true}
-                  {...register("email", {
-                    required: "Email is required!",
-                  })}
+                  {...register("name")}
                 />
-                {errors.email && (
+                {/* {errors.email && (
                   <span className="text-red-500 text-xs m-1">
                     {errors.email.message}
                   </span>
-                )}
+                )} */}
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
                   id="standard-basic"
-                  label="Password"
+                  label="Email"
                   variant="standard"
-                  type="password"
+                  type="text"
                   fullWidth={true}
-                  {...register("password", {
-                    required: "Password is required!",
-                  })}
+                  {...register("email")}
                 />
-                {errors.password && (
+                {/* {errors.password && (
                   <span className="text-red-500 text-xs m-1">
                     {errors.password.message}
                   </span>
-                )}
+                )} */}
               </Grid>
               <Grid item xs={12} textAlign="center"></Grid>
             </Grid>
@@ -137,10 +142,11 @@ const LoginPage = () => {
                 width: "200px",
                 textAlign: "center",
                 marginBottom: 5,
+                bgcolor: "#f7ad1b",
               }}
               type="submit"
             >
-              Login
+              Edit
             </Button>
           </form>
         </Box>
@@ -149,4 +155,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default EditProfile;
