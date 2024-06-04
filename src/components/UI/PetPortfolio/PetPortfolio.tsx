@@ -3,10 +3,8 @@ import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
 import Image from "next/image";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import {IPetData} from "@/interfaces/PetInterface";
-import {blue} from "@mui/material/colors";
+
 import AdoptionButton from "./AdoptionButton";
-import Link from "next/link";
-import {useRouter} from "next/navigation";
 
 const PetPortfolio = ({pet}: {pet: IPetData}) => {
   console.log("data from ui: ", pet);

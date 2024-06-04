@@ -20,10 +20,9 @@ import {toast} from "sonner";
 
 interface props {
   accessToken: string;
-  updateProfile: Dispatch<SetStateAction<User>>;
+  updateProfile: Dispatch<SetStateAction<User | undefined>>;
 }
 const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -112,11 +111,6 @@ const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
                   fullWidth={true}
                   {...register("name")}
                 />
-                {/* {errors.email && (
-                  <span className="text-red-500 text-xs m-1">
-                    {errors.email.message}
-                  </span>
-                )} */}
               </Grid>
 
               <Grid item xs={12}>
@@ -128,16 +122,10 @@ const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
                   fullWidth={true}
                   {...register("email")}
                 />
-                {/* {errors.password && (
-                  <span className="text-red-500 text-xs m-1">
-                    {errors.password.message}
-                  </span>
-                )} */}
               </Grid>
               <Grid item xs={12} textAlign="center"></Grid>
             </Grid>
             <Button
-              // textAlign="center"
               sx={{
                 width: "200px",
                 textAlign: "center",
@@ -146,7 +134,7 @@ const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
               }}
               type="submit"
             >
-              Edit
+              Update
             </Button>
           </form>
         </Box>

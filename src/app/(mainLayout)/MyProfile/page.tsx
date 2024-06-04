@@ -1,4 +1,5 @@
 "use client";
+import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
 import EditProfile from "@/components/UI/Profile/EditProfile";
 import UserProfile from "@/services/actions/UserProfile";
 import {getUserInfo} from "@/services/auth.services";
@@ -90,6 +91,23 @@ const ProfilePage = () => {
           />
         </Box>
       </Stack>
+
+      <Typography
+        width={"100%"}
+        margin={4}
+        textAlign="left"
+        variant="h4"
+        color="primary.main"
+        // component="span"
+        fontWeight={"bold"}
+        // fontSize={"30px"}
+      >
+        My Adop
+        <Box color="black" component="span">
+          ted Paws
+        </Box>
+      </Typography>
+      <AdoptedPetTable accessToken={accessToken as string} />
     </Container>
   );
 };
