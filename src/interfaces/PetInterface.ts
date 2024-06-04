@@ -11,6 +11,7 @@ export interface IPetData {
   location: string;
   description: string;
   temperament: string;
+  adoptedStatus: string;
   medicalHistory: string;
   adoptionRequirements: string;
   createdAt: string;
@@ -19,7 +20,7 @@ export interface IPetData {
 }
 
 export interface IApiResponse {
-  success: string;
+  success: boolean;
   statusCode: number;
   message: string;
   data: IPetData;

@@ -15,7 +15,7 @@ const AdoptionButton = ({id}: {id: string}) => {
         textAlign="center"
         container
         // spacing={2}
-        direction={{xs: "row", sm: "row"}}
+        direction={{xs: "column-reverse", sm: "row"}}
         justifyContent="center"
         alignItems="center"
       >
@@ -31,7 +31,6 @@ const AdoptionButton = ({id}: {id: string}) => {
           >
             <Link href={`/AdoptionRequest/${id}`}>
               <Button
-                // onClick={handleAdoption}
                 sx={{
                   width: "100%",
                   padding: "30px",
@@ -39,11 +38,11 @@ const AdoptionButton = ({id}: {id: string}) => {
               >
                 {" "}
                 <Box
-                  my="100px"
+                  my={{xs: "120px", sm: "100px"}}
                   color="secondary.light"
                   component={"span"}
                   fontWeight={"bold"}
-                  fontSize={"30px"}
+                  fontSize={{xs: "20px", sm: "30px"}}
                 >
                   Click here to Adopt Me!
                 </Box>
