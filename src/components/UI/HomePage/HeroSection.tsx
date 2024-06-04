@@ -1,3 +1,4 @@
+import getEnvVariable from "@/utils/getEnvVariable";
 import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import {blue} from "@mui/material/colors";
 import Image from "next/image";

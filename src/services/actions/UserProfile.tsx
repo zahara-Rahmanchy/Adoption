@@ -1,7 +1,10 @@
 "use server";
 
+import getEnvVariable from "@/utils/getEnvVariable";
+
 const UserProfile = async (accessToken: string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`, {
+  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+  const res = await fetch(`${url}/profile`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

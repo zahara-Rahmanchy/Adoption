@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const accessToken = getFromLocalStorage("accessToken");
 
   const [profile, setProfile] = useState<User>();
-  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`);
+  // console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`);
   useEffect(() => {
     UserProfile(accessToken as string).then((value: User) => {
       console.log(value);
@@ -80,7 +80,7 @@ const ProfilePage = () => {
               Email: {profile?.email}
             </Typography>
             <Typography color="primary.main">
-              {profile?.contactNumber}
+              Contact: {profile?.contactNumber}
             </Typography>
           </Box>
         </Stack>

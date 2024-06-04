@@ -1,11 +1,15 @@
 "use server";
+
+import getEnvVariable from "@/utils/getEnvVariable";
+
 interface EditData {
   name?: string;
   email?: string;
 }
 const EditUserProfile = async (editData: EditData, accessToken: string) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`, {
+    const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+    const res = await fetch(`${url}/profile`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

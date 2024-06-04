@@ -1,4 +1,5 @@
 "use client";
+import getEnvVariable from "@/utils/getEnvVariable";
 import {
   Button,
   Paper,
@@ -17,25 +18,24 @@ import {useEffect, useState} from "react";
 const tableHeads = ["", "Name", "Adoption Date", "Details"];
 const AdoptedPetTable = ({accessToken}: {accessToken: string}) => {
   const [adopteds, setAdopteds] = useState([]);
+  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
   useEffect(() => {
     const adoptedPet = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/adopted-pets`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: accessToken ? accessToken : "",
-          },
+      const res = await fetch(`${url}/adopted-pets`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken ? accessToken : "",
+        },
 
-          cache: "no-store",
-        }
-      );
+        cache: "no-store",
+      });
       const petsData = await res.json();
       console.log("petsData: ", petsData);
       setAdopteds(petsData.data);
     };
     adoptedPet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
   console.log("adp:", adopteds);
   return (

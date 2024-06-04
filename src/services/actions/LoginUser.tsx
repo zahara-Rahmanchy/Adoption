@@ -1,9 +1,12 @@
 "use server";
 import {LoginInputs} from "@/interfaces/LoginInputs";
+import getEnvVariable from "@/utils/getEnvVariable";
 import {cookies} from "next/headers";
 
 export const LoginUser = async (userData: LoginInputs) => {
-  const res = await fetch(`https://assignment-8-cyan.vercel.app/api/login`, {
+  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+  console.log("url: ", url);
+  const res = await fetch(`${url}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

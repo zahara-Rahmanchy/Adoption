@@ -1,11 +1,15 @@
 "use server";
+
+import getEnvVariable from "@/utils/getEnvVariable";
+
 type RegisterData = {
   name: string;
   email: string;
   password: string;
 };
 const RegisterUser = async (userData: RegisterData) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, {
+  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+  const res = await fetch(`${url}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

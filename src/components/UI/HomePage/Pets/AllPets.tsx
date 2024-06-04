@@ -22,6 +22,7 @@ import Image from "next/image";
 import ExtractSpecialNeeds from "./ExtractSpecialNeeds";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
+import getEnvVariable from "@/utils/getEnvVariable";
 
 const AllPets = () => {
   const router = useRouter();
@@ -59,14 +60,12 @@ const AllPets = () => {
       if (specialNeeds) query.append("specialNeeds", specialNeeds);
       console.log(query.toString());
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/pets?${query.toString()}`,
-          {
-            next: {
-              revalidate: 30,
-            },
-          }
-        );
+        const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+        const res = await fetch(`${url}/pets?${query.toString()}`, {
+          next: {
+            revalidate: 30,
+          },
+        });
         //  destructuring the data and naming as pets
         const {data} = await res.json();
         setPets(data);

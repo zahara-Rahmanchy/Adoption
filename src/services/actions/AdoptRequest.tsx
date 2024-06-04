@@ -1,5 +1,7 @@
 "use server";
 
+import getEnvVariable from "@/utils/getEnvVariable";
+
 // import {getFromLocalStorage} from "@/utils/local-storage";
 
 export type AdoptionData = {
@@ -13,18 +15,16 @@ const AdoptRequest = async (
   accessToken: string
 ) => {
   console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/adoption-request`);
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/adoption-request`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: accessToken ? accessToken : "",
-      },
-      body: JSON.stringify(adoptionData),
-      cache: "no-store",
-    }
-  );
+  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+  const res = await fetch(`${url}/adoption-request`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: accessToken ? accessToken : "",
+    },
+    body: JSON.stringify(adoptionData),
+    cache: "no-store",
+  });
   const userInfo = await res.json();
   return userInfo;
 };
