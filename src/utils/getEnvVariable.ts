@@ -6,7 +6,8 @@ export default function getEnvVariable(name: string) {
   noStore();
   const variable = process.env[name];
   if (!variable) {
-    throw new Error("Missing environment variable for " + name);
+    console.log("variable: ", variable);
+    //   throw new Error("Missing environment variable for " + name);
   }
   return variable;
 }
