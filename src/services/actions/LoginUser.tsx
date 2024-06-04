@@ -1,12 +1,9 @@
 "use server";
+import {LoginInputs} from "@/interfaces/LoginInputs";
 import {cookies} from "next/headers";
-export type LoginInputs = {
-  name: string;
-  email: string;
-  password: string;
-};
+
 export const LoginUser = async (userData: LoginInputs) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
+  const res = await fetch(`http://localhost:5000/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

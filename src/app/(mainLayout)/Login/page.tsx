@@ -1,5 +1,6 @@
 "use client";
-import {LoginInputs, LoginUser} from "@/services/actions/LoginUser";
+import {LoginInputs} from "@/interfaces/LoginInputs";
+import {LoginUser} from "@/services/actions/LoginUser";
 import {storeUserInfo} from "@/services/auth.services";
 import {
   Backdrop,
