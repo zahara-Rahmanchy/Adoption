@@ -3,7 +3,7 @@ import {LoginInputs} from "@/interfaces/LoginInputs";
 import {cookies} from "next/headers";
 
 export const LoginUser = async (userData: LoginInputs) => {
-  const res = await fetch(`http://localhost:5000/api/login`, {
+  const res = await fetch(`https://assignment-8-cyan.vercel.app/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
