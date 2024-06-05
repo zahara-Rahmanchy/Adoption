@@ -25,11 +25,13 @@ import ExtractSpecialNeeds from "./ExtractSpecialNeeds";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
 import getEnvVariable from "@/utils/getEnvVariable";
+import {getUserInfo, isLoggedIn} from "@/services/auth.services";
+import {getFromCookiesClient} from "@/utils/local-storage";
+import {authKey} from "@/constants/authkey";
 
 const AllPets = () => {
   const router = useRouter();
-  // const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  // console.log("url: ", url);
+
   const [loading, setLoading] = useState(false);
   const [pets, setPets] = useState([]);
   const [specialNeedsArray, setSpecialNeedsArray] = useState<string[]>([]);
@@ -355,7 +357,7 @@ const AllPets = () => {
                   justifyContent: "center",
                 }}
               >
-                <Link href={`PetPortfolio/${pet.id}`}>
+                <Link href={isLoggedIn() ? `PetPortfolio/${pet.id}` : `/Login`}>
                   <Button
                     variant="contained"
                     // color="primary.main"

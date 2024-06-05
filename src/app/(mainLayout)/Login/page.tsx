@@ -37,11 +37,12 @@ const LoginPage = () => {
       const res = await LoginUser(data);
       console.log(res);
       if (res?.data?.token) {
-        storeUserInfo(res?.data?.token);
-
+        storeUserInfo(res.data.token);
         router.push("/");
         router.refresh();
         toast.success(res?.message);
+      } else {
+        toast.error(res.message);
       }
     } catch (err) {
       console.log(err);

@@ -15,8 +15,8 @@ export const LoginUser = async (userData: LoginInputs) => {
     cache: "no-store",
   });
   const userInfo = await res.json();
-  if (userInfo.success) {
-    cookies().set("accessToken", userInfo?.data?.token);
-  }
+  // if (userInfo.data.accessToken) {
+  //   cookies().set("accessToken", userInfo?.data?.token);
+  // }
   return userInfo;
 };

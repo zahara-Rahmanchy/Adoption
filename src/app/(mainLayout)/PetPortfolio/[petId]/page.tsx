@@ -2,9 +2,14 @@ import PetPortfolio from "@/components/UI/PetPortfolio/PetPortfolio";
 import {petId} from "@/constants/PetId";
 import {authKey} from "@/constants/authkey";
 import {IApiResponse, IPetData} from "@/interfaces/PetInterface";
+import {getUserInfo} from "@/services/auth.services";
 import getEnvVariable from "@/utils/getEnvVariable";
-
+import {getServerCookies} from "@/utils/getServerCookies";
+// import {getFromCookies} from "@/utils/local-storage";
+import {getCookie, getCookies} from "cookies-next";
 import {cookies} from "next/headers";
+
+// import {toast} from "sonner";
 
 const PortfolioPage = async ({params}: petId) => {
   const accessToken = cookies().get(authKey)?.value;
@@ -12,6 +17,7 @@ const PortfolioPage = async ({params}: petId) => {
   console.log("accessToken: ", accessToken);
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
   console.log("url", url);
+
   // try{
   const res = await fetch(`${url}/pets/${params.petId}`, {
     method: "GET",

@@ -3,6 +3,7 @@
 import {authKey} from "@/constants/authkey";
 import getEnvVariable from "@/utils/getEnvVariable";
 import {cookies} from "next/headers";
+import {storeUserInfo} from "../auth.services";
 
 const UserProfile = async () => {
   const accessToken = cookies().get(authKey)?.value;
@@ -21,7 +22,10 @@ const UserProfile = async () => {
   });
   const profileData = await res.json();
 
-  console.log("prfofd", profileData);
+  // console.log("prfofd", profileData);
+  // if (profileData.success) {
+  //   storeUserInfo(profileData.data.accessToken);
+  // }
   return profileData.data;
 };
 

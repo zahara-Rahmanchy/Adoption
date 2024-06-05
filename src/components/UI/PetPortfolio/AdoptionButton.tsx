@@ -1,5 +1,8 @@
 "use client";
+import {authKey} from "@/constants/authkey";
 import {IPetData} from "@/interfaces/PetInterface";
+import {getUserInfo, getUserRole, isLoggedIn} from "@/services/auth.services";
+import {getFromCookiesClient} from "@/utils/local-storage";
 import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
 import {blueGrey} from "@mui/material/colors";
 import Image from "next/image";
@@ -29,7 +32,13 @@ const AdoptionButton = ({id}: {id: string}) => {
             // alignItems="center"
             spacing={2}
           >
-            <Link href={`/AdoptionRequest/${id}`}>
+            <Link
+              href={
+                isLoggedIn() && getUserRole() === "User"
+                  ? `/AdoptionRequest/${id}`
+                  : "/"
+              }
+            >
               <Button
                 sx={{
                   width: "100%",
