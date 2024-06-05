@@ -16,11 +16,12 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import AdoptRequest, {AdoptionData} from "@/services/actions/AdoptRequest";
 import {petId} from "@/constants/PetId";
 import {toast} from "sonner";
-import {getFromLocalStorage} from "@/utils/local-storage";
+import {getFromCookiesClient} from "@/utils/local-storage";
 import {getUserInfo} from "@/services/auth.services";
+// import {getUserInfo} from "@/services/actions/auth.services";
 
 const AdoptionPage = ({params}: petId) => {
-  const accessToken = getFromLocalStorage("accessToken");
+  const accessToken = getFromCookiesClient("accessToken");
   const userData: any = getUserInfo();
 
   const [agreeConditions, setAgreeConditions] = useState<boolean>(false);

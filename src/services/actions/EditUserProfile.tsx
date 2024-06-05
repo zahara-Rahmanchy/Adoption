@@ -1,6 +1,7 @@
 "use server";
 
 import getEnvVariable from "@/utils/getEnvVariable";
+import UserProfile from "./UserProfile";
 
 interface EditData {
   name?: string;
@@ -21,6 +22,7 @@ const EditUserProfile = async (editData: EditData, accessToken: string) => {
     const profileData = await res.json();
 
     console.log("update", profileData);
+
     return profileData;
   } catch (err) {
     console.log("err: ", err);

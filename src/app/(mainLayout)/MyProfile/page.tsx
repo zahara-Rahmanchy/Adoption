@@ -1,13 +1,21 @@
-"use client";
-import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
-import EditProfile from "@/components/UI/Profile/EditProfile";
-import UserProfile from "@/services/actions/UserProfile";
-import {getUserInfo} from "@/services/auth.services";
-import {getFromLocalStorage} from "@/utils/local-storage";
-import {AccountCircleRounded} from "@mui/icons-material";
+// "use client";
+// import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
+// import EditProfile from "@/components/UI/Profile/EditProfile";
+// import UserProfile from "@/services/actions/UserProfile";
+// import {getUserInfo} from "@/services/auth.services";
+// import {getFromCookies} from "@/utils/local-storage";
+// import {AccountCircleRounded} from "@mui/icons-material";
 import {Box, Container, Stack, Typography} from "@mui/material";
-import {blue} from "@mui/material/colors";
-import {useEffect, useState} from "react";
+// import {blue} from "@mui/material/colors";
+// import {useEffect, useState} from "react";
+
+import {authKey} from "@/constants/authkey";
+import UserProfile from "@/services/actions/UserProfile";
+import {AccountCircleRounded} from "@mui/icons-material";
+import EditProfile from "@/components/UI/Profile/EditProfile";
+import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
+import {cookies} from "next/headers";
+// import { Container } from "@mui/material";
 
 export interface User {
   id: String;
@@ -17,19 +25,21 @@ export interface User {
   createdAt: String;
   updatedAt: String;
 }
-const ProfilePage = () => {
-  const accessToken = getFromLocalStorage("accessToken");
-
-  const [profile, setProfile] = useState<User>();
+const ProfilePage = async () => {
+  const accessToken = cookies().get(authKey)?.value;
+  const profile = await UserProfile();
+  console.log(profile);
+  // const [profile, setProfile] = useState<User>();
   // console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`);
-  useEffect(() => {
-    UserProfile(accessToken as string).then((value: User) => {
-      console.log(value);
-      setProfile(value);
-    });
-  }, [accessToken]);
-  console.log("profile: ", profile);
+  // useEffect(() => {
+  //   UserProfile(accessToken as string).then((value: User) => {
+  //     console.log(value);
+  //     setProfile(value);
+  //   });
+  // }, [accessToken]);
+  // console.log("profile: ", profile);
   return (
+    // <div>hkj</div>
     <Container>
       <Typography
         width={"100%"}
@@ -55,7 +65,7 @@ const ProfilePage = () => {
         width={"100%"}
       >
         <Stack
-          width={"50%"}
+          width={{xs: "100%", sm: "50%"}}
           minHeight={"200px"}
           direction={{xs: "column", sm: "row"}}
           sx={{
@@ -79,7 +89,7 @@ const ProfilePage = () => {
             <Typography color="primary.main">
               Email: {profile?.email}
             </Typography>
-            <Typography color="primary.main">
+            <Typography color="primary.main" marginBottom={2}>
               Contact: {profile?.contactNumber}
             </Typography>
           </Box>
@@ -87,14 +97,14 @@ const ProfilePage = () => {
         <Box>
           <EditProfile
             accessToken={accessToken as string}
-            updateProfile={setProfile}
+            // updateProfile={setProfile}
           />
         </Box>
       </Stack>
 
       <Typography
         width={"100%"}
-        margin={4}
+        my={4}
         textAlign="left"
         variant="h4"
         color="primary.main"
@@ -107,7 +117,8 @@ const ProfilePage = () => {
           ted Paws
         </Box>
       </Typography>
-      <AdoptedPetTable accessToken={accessToken as string} />
+      {/* accessToken={accessToken as string} */}
+      <AdoptedPetTable />
     </Container>
   );
 };

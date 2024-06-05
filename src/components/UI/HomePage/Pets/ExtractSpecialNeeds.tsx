@@ -3,7 +3,7 @@ import getEnvVariable from "@/utils/getEnvVariable";
 const ExtractSpecialNeeds = async (): Promise<string[]> => {
   try {
     const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-    const res = await fetch(`${url}/pets`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/pets`);
     //  destructuring the data and naming as pets
     const {data} = await res.json();
     // setPets(data);

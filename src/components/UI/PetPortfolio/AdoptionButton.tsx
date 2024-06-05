@@ -42,7 +42,7 @@ const AdoptionButton = ({id}: {id: string}) => {
                   color="secondary.light"
                   component={"span"}
                   fontWeight={"bold"}
-                  fontSize={{xs: "20px", sm: "30px"}}
+                  fontSize={{xs: "20px"}}
                 >
                   Click here to Adopt Me!
                 </Box>

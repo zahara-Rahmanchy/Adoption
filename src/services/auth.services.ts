@@ -1,17 +1,18 @@
 import {authKey} from "@/constants/authkey";
 import {DecodeToken} from "@/utils/jwt";
 import {
-  getFromLocalStorage,
+  // getFromCookies,
+  getFromCookiesClient,
   removeFromLocalStorage,
-  setInLocalStorage,
+  setInCookies,
 } from "@/utils/local-storage";
 
 export const storeUserInfo = (token: string) => {
-  return setInLocalStorage(authKey, token);
+  return setInCookies(authKey, token);
 };
 
 export const getUserInfo = () => {
-  const authToken = getFromLocalStorage(authKey);
+  const authToken = getFromCookiesClient(authKey);
   console.log(authToken);
   if (authToken) {
     const decodedData = DecodeToken(authToken);

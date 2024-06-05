@@ -1,11 +1,13 @@
 "use client";
 import {
+  Backdrop,
   Box,
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
+  CircularProgress,
   Container,
   FormControl,
   Grid,
@@ -26,6 +28,9 @@ import getEnvVariable from "@/utils/getEnvVariable";
 
 const AllPets = () => {
   const router = useRouter();
+  // const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+  // console.log("url: ", url);
+  const [loading, setLoading] = useState(false);
   const [pets, setPets] = useState([]);
   const [specialNeedsArray, setSpecialNeedsArray] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>();
@@ -60,12 +65,15 @@ const AllPets = () => {
       if (specialNeeds) query.append("specialNeeds", specialNeeds);
       console.log(query.toString());
       try {
-        const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-        const res = await fetch(`${url}/pets?${query.toString()}`, {
-          next: {
-            revalidate: 30,
-          },
-        });
+        setLoading(true);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/pets?${query.toString()}`,
+          {
+            next: {
+              revalidate: 30,
+            },
+          }
+        );
         //  destructuring the data and naming as pets
         const {data} = await res.json();
         setPets(data);
@@ -75,6 +83,8 @@ const AllPets = () => {
         console.log("specialNeedsList: ", specialNeedsList);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchPets();
@@ -178,6 +188,12 @@ const AllPets = () => {
           Reset
         </Button>
       </Box>
+
+      {loading && (
+        <p style={{textAlign: "center"}}>
+          <CircularProgress color="inherit" />
+        </p>
+      )}
 
       <Grid container rowSpacing={5} justifyContent="center" marginTop="10px">
         {pets.map((pet: any) => (

@@ -1,6 +1,7 @@
 "use client";
 import {User} from "@/app/(mainLayout)/MyProfile/page";
 import EditUserProfile from "@/services/actions/EditUserProfile";
+import UserProfile from "@/services/actions/UserProfile";
 import {
   Backdrop,
   Box,
@@ -20,10 +21,11 @@ import {toast} from "sonner";
 
 interface props {
   accessToken: string;
-  updateProfile: Dispatch<SetStateAction<User | undefined>>;
+  // updateProfile: Dispatch<SetStateAction<User | undefined>>;
 }
-const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
+const EditProfile: FC<props> = ({accessToken}) => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -43,10 +45,10 @@ const EditProfile: FC<props> = ({accessToken, updateProfile}) => {
     try {
       const res = await EditUserProfile(data, accessToken);
       console.log(res);
-      if (res?.data?.id) {
-        // this part is used so that updated data is visible on the page
-        // without reload
-        updateProfile(res.data as User);
+      if (res?.success) {
+        console.log("res.success: ", res.success);
+        router.refresh();
+
         toast.success(res?.message);
       }
     } catch (err) {

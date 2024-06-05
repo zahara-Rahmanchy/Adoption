@@ -1,8 +1,11 @@
 "use server";
 
+import {authKey} from "@/constants/authkey";
 import getEnvVariable from "@/utils/getEnvVariable";
+import {cookies} from "next/headers";
 
-const UserProfile = async (accessToken: string) => {
+const UserProfile = async () => {
+  const accessToken = cookies().get(authKey)?.value;
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
   console.log("url: ", url);
   const res = await fetch(`${url}/profile`, {
@@ -11,10 +14,10 @@ const UserProfile = async (accessToken: string) => {
       "Content-Type": "application/json",
       Authorization: accessToken ? accessToken : "",
     },
-
-    next: {
-      revalidate: 60,
-    },
+    cache: "no-store",
+    // next: {
+    //   revalidate: 60,
+    // },
   });
   const profileData = await res.json();
 

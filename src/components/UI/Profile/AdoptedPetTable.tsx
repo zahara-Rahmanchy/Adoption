@@ -1,4 +1,4 @@
-"use client";
+import {authKey} from "@/constants/authkey";
 import getEnvVariable from "@/utils/getEnvVariable";
 import {
   Button,
@@ -11,32 +11,30 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import {cookies} from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import {useEffect, useState} from "react";
 
 const tableHeads = ["", "Name", "Adoption Date", "Details"];
-const AdoptedPetTable = ({accessToken}: {accessToken: string}) => {
-  const [adopteds, setAdopteds] = useState([]);
-  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  useEffect(() => {
-    const adoptedPet = async () => {
-      const res = await fetch(`${url}/adopted-pets`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: accessToken ? accessToken : "",
-        },
 
-        cache: "no-store",
-      });
-      const petsData = await res.json();
-      console.log("petsData: ", petsData);
-      setAdopteds(petsData.data);
-    };
-    adoptedPet();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+const AdoptedPetTable = async () => {
+  const accessToken = cookies().get(authKey)?.value;
+
+  const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+
+  const res = await fetch(`${url}/adopted-pets`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: accessToken ? accessToken : "",
+    },
+
+    cache: "no-store",
+  });
+  const petsData = await res.json();
+  console.log("petsData: ", petsData);
+  const adopteds = petsData.data;
+
   console.log("adp:", adopteds);
   return (
     <TableContainer component={Paper}>
@@ -60,9 +58,13 @@ const AdoptedPetTable = ({accessToken}: {accessToken: string}) => {
         <TableBody>
           {adopteds.map((value: any, key: number) => (
             <TableRow key={key}>
-              <TableCell component="th" scope="row">
+              <TableCell
+                component="th"
+                scope="row"
+                // sx={{bgcolor: "blue", textAlign: "center", mx: "auto"}}
+              >
                 <Image
-                  style={{borderRadius: "50%"}}
+                  style={{borderRadius: "50%", textAlign: "center"}}
                   src={value?.pet?.image}
                   alt="pet img"
                   width={100}

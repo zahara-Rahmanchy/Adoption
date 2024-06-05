@@ -1,26 +1,23 @@
 import PetPortfolio from "@/components/UI/PetPortfolio/PetPortfolio";
 import {petId} from "@/constants/PetId";
+import {authKey} from "@/constants/authkey";
 import {IApiResponse, IPetData} from "@/interfaces/PetInterface";
 import getEnvVariable from "@/utils/getEnvVariable";
+
 import {cookies} from "next/headers";
-// import {toast} from "sonner";
 
 const PortfolioPage = async ({params}: petId) => {
-  console.log(
-    "params: ",
-    params,
-    "url: ",
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/pets/${params.petId}`
-  );
-  const accessToken = cookies().get("accessToken");
+  const accessToken = cookies().get(authKey)?.value;
+
   console.log("accessToken: ", accessToken);
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
+  console.log("url", url);
   // try{
   const res = await fetch(`${url}/pets/${params.petId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: accessToken?.value ? String(accessToken.value) : "",
+      Authorization: accessToken ? String(accessToken) : "",
     },
 
     cache: "no-store",
