@@ -34,7 +34,7 @@ export const SideBar = () => {
         </ListItem>
 
         <ListItem disablePadding>
-          <Link href="/Users">
+          <Link href="/Dashboard/Admin/Users">
             <ListItemButton>
               <ListItemIcon>
                 <PeopleAltTwoTone />
@@ -47,7 +47,7 @@ export const SideBar = () => {
       <Divider />
       <List>
         <ListItem disablePadding>
-          <Link href="/AddPet">
+          <Link href="/Dashboard/Admin/AddPet">
             <ListItemButton>
               <ListItemIcon>
                 <PetsIcon />
@@ -58,7 +58,7 @@ export const SideBar = () => {
         </ListItem>
 
         <ListItem disablePadding>
-          <Link href="/Managepets">
+          <Link href="Dashboard/Admin/Managepets">
             <ListItemButton>
               <ListItemIcon>
                 <PetsIcon fontSize="small" />

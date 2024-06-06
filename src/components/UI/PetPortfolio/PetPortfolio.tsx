@@ -37,7 +37,7 @@ const PetPortfolio = ({
               justifyContent="center"
             >
               <Image
-                src={pet.image}
+                src={pet.image[0]}
                 alt={""}
                 width="500"
                 height="100"
@@ -229,7 +229,9 @@ const PetPortfolio = ({
         </Grid>
       )}
       {/* adoption Request button */}
-      {pet && pet.adoptedStatus === "PENDING" && <AdoptionButton id={pet.id} />}
+      {pet && pet.adoptedStatus === "PENDING" && (
+        <AdoptionButton id={pet.id} requirements={pet.adoptionRequirements} />
+      )}
     </Container>
   );
 };

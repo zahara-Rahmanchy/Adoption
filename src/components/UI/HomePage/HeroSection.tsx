@@ -6,7 +6,7 @@ import React from "react";
 // import assets from "@assets";
 const HeroSection = () => {
   return (
-    <Container>
+    <Container sx={{marginBottom: "200px"}}>
       <Stack direction={{xs: "column", md: "column", lg: "row"}}>
         <Box py={2}>
           <Typography variant="h1" color="primary.main" component="h3">

@@ -11,7 +11,13 @@ import {useRouter} from "next/navigation";
 import React, {FC} from "react";
 // sx={{bgcolor: "lightblue"}}
 
-const AdoptionButton = ({id}: {id: string}) => {
+const AdoptionButton = ({
+  id,
+  requirements,
+}: {
+  id: string;
+  requirements: string;
+}) => {
   return (
     <Container>
       <Grid
@@ -32,6 +38,12 @@ const AdoptionButton = ({id}: {id: string}) => {
             // alignItems="center"
             spacing={2}
           >
+            <Typography fontSize={"15px"}>
+              <Box component="span" color="black" fontWeight={"bold"}>
+                Adoption Requirements:
+              </Box>{" "}
+              {requirements}
+            </Typography>
             <Link
               href={
                 isLoggedIn() && getUserRole() === "User"

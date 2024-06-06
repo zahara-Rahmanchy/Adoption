@@ -228,7 +228,7 @@ const AllPets = () => {
                 }}
               >
                 <Image
-                  src={pet.image}
+                  src={pet.image[0]}
                   alt={`${pet.species} image`}
                   width={300}
                   height={0}
