@@ -1,9 +1,17 @@
 "use client";
-import {authKey} from "@/constants/authkey";
-import {IPetData} from "@/interfaces/PetInterface";
+
 import {getUserInfo, getUserRole, isLoggedIn} from "@/services/auth.services";
-import {getFromCookiesClient} from "@/utils/local-storage";
-import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
+
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import {blueGrey} from "@mui/material/colors";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +26,9 @@ const AdoptionButton = ({
   id: string;
   requirements: string;
 }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  console.log("scrren: ", isSmallScreen);
   return (
     <Container>
       <Grid
@@ -38,6 +49,7 @@ const AdoptionButton = ({
             // alignItems="center"
             spacing={2}
           >
+            {" "}
             <Typography fontSize={"15px"}>
               <Box component="span" color="black" fontWeight={"bold"}>
                 Adoption Requirements:
@@ -71,22 +83,38 @@ const AdoptionButton = ({
             </Link>
           </Stack>
         </Grid>
-        <Grid item xs={6}>
-          <Image
-            style={{
-              marginLeft: "100px",
-              color: "purple",
-              transform: "scaleY(-1)",
-              textAlign: "right",
-              objectFit: "cover",
-            }}
-            src={
-              "https://media.tenor.com/L2XoEXWh7ewAAAAi/predicto-pointing-up.gif"
-            }
-            width={"200"}
-            height={"0"}
-            alt={""} // src="https://media.tenor.com/YFxmLLI0Og8AAAAi/kstr-kochstrasse.gif"
-          />
+        <Grid item xs={12} md={6}>
+          {isSmallScreen ? (
+            <Image
+              style={{
+                marginTop: "20px",
+                color: "purple",
+
+                textAlign: "center",
+                objectFit: "cover",
+              }}
+              src="https://cdn.pixabay.com/animation/2022/10/13/00/28/00-28-27-444_512.gif"
+              width={"200"}
+              height={"0"}
+              alt={""} // src="https://media.tenor.com/YFxmLLI0Og8AAAAi/kstr-kochstrasse.gif"
+            />
+          ) : (
+            <Image
+              style={{
+                marginLeft: "100px",
+                color: "purple",
+                transform: "scaleY(-1)",
+                textAlign: "right",
+                objectFit: "cover",
+              }}
+              src={
+                "https://media.tenor.com/L2XoEXWh7ewAAAAi/predicto-pointing-up.gif"
+              }
+              width={"200"}
+              height={"0"}
+              alt={""} // src="https://media.tenor.com/YFxmLLI0Og8AAAAi/kstr-kochstrasse.gif"
+            />
+          )}
         </Grid>
       </Grid>
     </Container>

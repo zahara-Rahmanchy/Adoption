@@ -1,5 +1,14 @@
 "use client";
-import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  ImageList,
+  ImageListItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import {IPetData} from "@/interfaces/PetInterface";
@@ -18,6 +27,7 @@ const PetPortfolio = ({
   console.log("data from ui: ", pet);
 
   return (
+    // <div style={{background: "whiteSmoke"}}>
     <Container>
       {error && error !== undefined && toast.message(error)}
       {pet && (
@@ -27,14 +37,15 @@ const PetPortfolio = ({
           spacing={2}
           direction={{xs: "column", sm: "row"}}
           justifyContent="center"
-          alignItems="center"
+          // alignItems="center"
         >
           <Grid item xs={6}>
             <Box
               my={"2px"}
               textAlign="center"
-              display="flex"
-              justifyContent="center"
+              // display="flex"
+              // flexDirection={"column"}
+              // justifyContent="center"
             >
               <Image
                 src={pet.image[0]}
@@ -57,14 +68,16 @@ const PetPortfolio = ({
             sm={6}
             container
             display="flex"
-            justifyContent="center"
+            // justifyContent="space-evenly"
             flexDirection="column"
             alignItems="center"
+            // padding={5}
           >
             <Box
               // bgcolor={"grey"}
               // paddingLeft="60px"
               // display="flex"
+              padding={5}
               textAlign={"left"}
             >
               <Typography
@@ -93,6 +106,23 @@ const PetPortfolio = ({
                 />
                 {pet.location}
               </Typography>
+              {pet.adoptedStatus === "ADOPTED" && (
+                <Typography
+                  variant="body1"
+                  marginTop="3px"
+                  marginBottom="15px"
+                  sx={{
+                    fontSize: "14px",
+                    // fontWeight: "bold",
+                  }}
+                  color="primary"
+                >
+                  <Box component={"span"} fontWeight={"bold"}>
+                    Adoption Status: {""}
+                  </Box>
+                  {pet.adoptedStatus}
+                </Typography>
+              )}
               <Typography
                 textAlign="left"
                 marginBottom="15px"
@@ -144,7 +174,8 @@ const PetPortfolio = ({
 
               {/* age,breed,type box */}
               <hr style={{marginTop: "13px", marginBottom: "20px"}} />
-              <Box>
+
+              <Stack direction={"row"} justifyContent={"space-between"}>
                 <Typography
                   textAlign="left"
                   marginRight="120px"
@@ -183,8 +214,8 @@ const PetPortfolio = ({
                   </Box>
                   {pet.breed}
                 </Typography>
-              </Box>
-              <Box>
+              </Stack>
+              <Stack direction={"row"} justifyContent={"space-between"}>
                 <Typography
                   textAlign="left"
                   marginRight="60px"
@@ -223,8 +254,47 @@ const PetPortfolio = ({
                   </Box>
                   {pet.medicalHistory}
                 </Typography>
-              </Box>
+              </Stack>
             </Box>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            {" "}
+            <hr />
+            <ImageList
+              cols={6}
+              // cols={{xs: 12, sm: 6}}
+
+              sx={{
+                marginTop: "30px",
+                textAlign: "center",
+                backgroundColor: "#fff4d9",
+              }}
+              // cols={3}
+              // rowHeight={164}
+            >
+              {pet.image.map((item, index) => (
+                <ImageListItem
+                  key={index}
+                  sx={{padding: "5px", textAlign: "center"}}
+                >
+                  <Image
+                    src={`${item}`}
+                    alt={`${(pet.species, index)}`}
+                    loading="lazy"
+                    width={"400"}
+                    height={"00"}
+                    style={{
+                      textAlign: "center",
+                      padding: "6px",
+                      // borderColor: "#865C97",
+                      // borderWidth: "3px",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
           </Grid>
         </Grid>
       )}

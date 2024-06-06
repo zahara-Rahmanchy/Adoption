@@ -65,7 +65,7 @@ const AdoptedPetTable = async () => {
               >
                 <Image
                   style={{borderRadius: "50%", textAlign: "center"}}
-                  src={value?.pet?.image}
+                  src={value?.pet?.image[0]}
                   alt="pet img"
                   width={100}
                   height={0}

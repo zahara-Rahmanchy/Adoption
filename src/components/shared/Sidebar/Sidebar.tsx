@@ -58,7 +58,7 @@ export const SideBar = () => {
         </ListItem>
 
         <ListItem disablePadding>
-          <Link href="Dashboard/Admin/Managepets">
+          <Link href="/Dashboard/Admin/ManagePets">
             <ListItemButton>
               <ListItemIcon>
                 <PetsIcon fontSize="small" />
