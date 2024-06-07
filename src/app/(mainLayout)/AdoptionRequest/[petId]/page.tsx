@@ -9,6 +9,8 @@ import {
   Typography,
   Checkbox,
   FormControlLabel,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import React, {useState} from "react";
 
@@ -18,12 +20,14 @@ import {petId} from "@/constants/PetId";
 import {toast} from "sonner";
 import {getFromCookiesClient} from "@/utils/local-storage";
 import {getUserInfo} from "@/services/auth.services";
+import {useRouter} from "next/navigation";
 // import {getUserInfo} from "@/services/actions/auth.services";
 
 const AdoptionPage = ({params}: petId) => {
+  const router = useRouter();
   const accessToken = getFromCookiesClient("accessToken");
   const userData: any = getUserInfo();
-
+  const [loading, setLoading] = useState(false);
   const [agreeConditions, setAgreeConditions] = useState<boolean>(false);
   const {
     register,
@@ -34,6 +38,7 @@ const AdoptionPage = ({params}: petId) => {
 
   const onSubmit: SubmitHandler<any> = async data => {
     // console.log(data);
+    setLoading(true);
     const {petOwnershipExperience, ...userInfo} = data;
     const petdata = {
       petId: params.petId,
@@ -46,17 +51,21 @@ const AdoptionPage = ({params}: petId) => {
         String(accessToken)
       );
       console.log(res);
-      // if (res?.data?.success === false) {
-      //   console.log(res?.message);
-      //   toast.error(res?.message);
-      // }
+
       if (res?.data) {
         toast.success(res?.message);
         reset();
-        //   router.push("/Login");
+        router.back();
+      } else {
+        toast.error(res?.message);
+        router.back();
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
+      toast.error(err?.message);
+      router.back();
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -92,6 +101,12 @@ const AdoptionPage = ({params}: petId) => {
               ion Request
             </Box>
           </Typography>
+          <Backdrop
+            sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
+            open={loading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid
               container
@@ -120,6 +135,7 @@ const AdoptionPage = ({params}: petId) => {
                   label="Contact Number"
                   variant="standard"
                   type="text"
+                  defaultValue={userData.contact}
                   fullWidth={true}
                   {...register("contactNumber")}
                 />
@@ -131,6 +147,7 @@ const AdoptionPage = ({params}: petId) => {
                   variant="standard"
                   type="text"
                   fullWidth={true}
+                  required
                   {...register("petOwnershipExperience")}
                 />
               </Grid>
@@ -148,7 +165,7 @@ const AdoptionPage = ({params}: petId) => {
 
             {/* <Checkbox label="Agree To Terms & Conditions" /> */}
             <Button
-              disabled={!agreeConditions}
+              disabled={!agreeConditions || loading}
               sx={{
                 marginBottom: 5,
                 width: "200px",

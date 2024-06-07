@@ -56,38 +56,39 @@ const AdoptedPetTable = async () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {adopteds.map((value: any, key: number) => (
-            <TableRow key={key}>
-              <TableCell
-                component="th"
-                scope="row"
-                // sx={{bgcolor: "blue", textAlign: "center", mx: "auto"}}
-              >
-                <Image
-                  style={{borderRadius: "50%", textAlign: "center"}}
-                  src={value?.pet?.image[0]}
-                  alt="pet img"
-                  width={100}
-                  height={0}
-                />
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {value?.pet?.name as string}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {value?.updatedAt as string}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                <Button
-                  component={Link}
-                  href={`PetPortfolio/${value?.pet?.id}`}
-                  size="small"
+          {adopteds !== undefined &&
+            adopteds.map((value: any, key: number) => (
+              <TableRow key={key}>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  // sx={{bgcolor: "blue", textAlign: "center", mx: "auto"}}
                 >
-                  Details
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+                  <Image
+                    style={{borderRadius: "50%", textAlign: "center"}}
+                    src={value?.pet?.image[0]}
+                    alt="pet img"
+                    width={100}
+                    height={0}
+                  />
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {value?.pet?.name as string}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {value?.updatedAt as string}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  <Button
+                    component={Link}
+                    href={`PetPortfolio/${value?.pet?.id}`}
+                    size="small"
+                  >
+                    Details
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

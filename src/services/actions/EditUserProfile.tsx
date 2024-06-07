@@ -6,8 +6,18 @@ import UserProfile from "./UserProfile";
 interface EditData {
   name?: string;
   email?: string;
+  role?: string;
+  active?: boolean;
 }
-const EditUserProfile = async (editData: EditData, accessToken: string) => {
+const EditUserProfile = async (
+  editData: EditData,
+  accessToken: string,
+  id: string
+) => {
+  const data = {
+    ...editData,
+    id: id,
+  };
   try {
     const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
     const res = await fetch(`${url}/profile`, {
@@ -16,7 +26,7 @@ const EditUserProfile = async (editData: EditData, accessToken: string) => {
         "Content-Type": "application/json",
         Authorization: accessToken ? accessToken : "",
       },
-      body: JSON.stringify(editData),
+      body: JSON.stringify(data),
       cache: "no-store",
     });
     const profileData = await res.json();

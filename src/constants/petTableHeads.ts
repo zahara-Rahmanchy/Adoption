@@ -15,7 +15,7 @@ export const petTableHeads = [
   "Adoption Requirements",
   "Created At",
   "Updated Date",
-  "AdoptionRequest",
+  "Adoption Requests",
   "Edit",
   "Remove",
 ];

@@ -2,6 +2,7 @@
 import {User} from "@/app/(mainLayout)/MyProfile/page";
 import EditUserProfile from "@/services/actions/EditUserProfile";
 import UserProfile from "@/services/actions/UserProfile";
+import {IjwtPayload, getUserInfo} from "@/services/auth.services";
 import {
   Backdrop,
   Box,
@@ -24,6 +25,7 @@ interface props {
   // updateProfile: Dispatch<SetStateAction<User | undefined>>;
 }
 const EditProfile: FC<props> = ({accessToken}) => {
+  const userInfo = getUserInfo() as IjwtPayload;
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const {
@@ -43,7 +45,7 @@ const EditProfile: FC<props> = ({accessToken}) => {
 
     console.log("Sanitized", data);
     try {
-      const res = await EditUserProfile(data, accessToken);
+      const res = await EditUserProfile(data, accessToken, userInfo?.id);
       console.log(res);
       if (res?.success) {
         console.log("res.success: ", res.success);

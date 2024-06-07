@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import MenuIcon from "@mui/icons-material/Menu";
+import {getUserInfo} from "@/services/auth.services";
 
 const Navbar = () => {
   const AuthButtons = dynamic(() => import("@/components/UI/AuthButtons"), {
@@ -12,6 +13,7 @@ const Navbar = () => {
   });
 
   const [show, setShow] = useState(false);
+  const userInfo = getUserInfo();
   return (
     <Container sx={{width: "100%", background: "white"}}>
       <Stack
@@ -48,7 +50,10 @@ const Navbar = () => {
           <Typography component={Link} href="/AboutUs">
             About Us
           </Typography>
-          <Typography component={Link} href="/Dashboard/Admin">
+          <Typography
+            component={Link}
+            href={userInfo ? "/Dashboard/Admin" : "/Login"}
+          >
             Dashboard
           </Typography>
           <AuthButtons />

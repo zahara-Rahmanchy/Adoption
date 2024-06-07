@@ -7,7 +7,7 @@ import {IjwtPayload, getUserRole} from "./services/auth.services";
 import {DecodeToken} from "./utils/jwt";
 
 export function middleware(request: NextRequest) {
-  console.log("red", request.nextUrl);
+  console.log("req", request);
   const accessToken = cookies().get(authKey)?.value;
   // role === "Admin" &&
   const decodedData = DecodeToken(accessToken as string) as IjwtPayload;

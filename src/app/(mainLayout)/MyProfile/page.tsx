@@ -15,6 +15,7 @@ import {AccountCircleRounded} from "@mui/icons-material";
 import EditProfile from "@/components/UI/Profile/EditProfile";
 import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
 import {cookies} from "next/headers";
+import {IjwtPayload, getUserInfo} from "@/services/auth.services";
 // import { Container } from "@mui/material";
 
 export interface User {
@@ -27,8 +28,10 @@ export interface User {
 }
 const ProfilePage = async () => {
   const accessToken = cookies().get(authKey)?.value;
+
   const profile = await UserProfile();
   console.log(profile);
+
   // const [profile, setProfile] = useState<User>();
   // console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`);
   // useEffect(() => {
@@ -97,6 +100,7 @@ const ProfilePage = async () => {
         <Box>
           <EditProfile
             accessToken={accessToken as string}
+
             // updateProfile={setProfile}
           />
         </Box>

@@ -15,6 +15,7 @@ const AuthButtons = () => {
   const router = useRouter();
   const handleLogout = () => {
     removeUser();
+    router.push("/");
     router.refresh();
     toast.success("Logged Out!");
   };
