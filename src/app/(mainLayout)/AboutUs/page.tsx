@@ -1,23 +1,27 @@
-import {Box, Container, Typography} from "@mui/material";
-import React from "react";
+"use client";
+// import About from "@/components/UI/About/About";
+import {teamInformation} from "@/constants/teamInformation";
+import {
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import React, {useEffect, useState} from "react";
 
+const About = dynamic(() => import("@/components/UI/About/About"), {
+  ssr: false,
+});
 const AboutPage = () => {
-  return (
-    <Container>
-      <Box>
-        <Typography color="primary.main" variant="h4" fontWeight={"bold"}>
-          About US
-        </Typography>
-        <Typography>
-          Our mission is to provide exceptional pet care and create a community
-          for pet lovers to share and discover the best resources for their
-          furry friends. We are dedicated to improving the lives of pets and
-          their owners by offering reliable, comprehensive, and up-to-date
-          information.
-        </Typography>
-      </Box>
-    </Container>
-  );
+  return <About />;
 };
 
 export default AboutPage;

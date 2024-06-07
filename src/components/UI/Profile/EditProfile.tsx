@@ -109,6 +109,7 @@ const EditProfile: FC<props> = ({accessToken}) => {
             >
               <Grid item xs={12} md={12}>
                 <TextField
+                  sx={{color: "white"}}
                   id="standard-basic"
                   label="Username"
                   variant="standard"
