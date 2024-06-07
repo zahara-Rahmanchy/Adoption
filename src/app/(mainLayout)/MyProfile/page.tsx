@@ -1,13 +1,4 @@
-// "use client";
-// import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
-// import EditProfile from "@/components/UI/Profile/EditProfile";
-// import UserProfile from "@/services/actions/UserProfile";
-// import {getUserInfo} from "@/services/auth.services";
-// import {getFromCookies} from "@/utils/local-storage";
-// import {AccountCircleRounded} from "@mui/icons-material";
-import {Box, Container, Stack, Typography} from "@mui/material";
-// import {blue} from "@mui/material/colors";
-// import {useEffect, useState} from "react";
+import {Box, Button, Container, Stack, Typography} from "@mui/material";
 
 import {authKey} from "@/constants/authkey";
 import UserProfile from "@/services/actions/UserProfile";
@@ -16,6 +7,8 @@ import EditProfile from "@/components/UI/Profile/EditProfile";
 import AdoptedPetTable from "@/components/UI/Profile/AdoptedPetTable";
 import {cookies} from "next/headers";
 import {IjwtPayload, getUserInfo} from "@/services/auth.services";
+import UserProfileUI, {IProfile} from "@/components/UI/Profile/UserProfileUI";
+import ChangePassword from "@/components/UI/Profile/ChangePassword";
 // import { Container } from "@mui/material";
 
 export interface User {
@@ -32,15 +25,6 @@ const ProfilePage = async () => {
   const profile = await UserProfile();
   console.log(profile);
 
-  // const [profile, setProfile] = useState<User>();
-  // console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`);
-  // useEffect(() => {
-  //   UserProfile(accessToken as string).then((value: User) => {
-  //     console.log(value);
-  //     setProfile(value);
-  //   });
-  // }, [accessToken]);
-  // console.log("profile: ", profile);
   return (
     // <div>hkj</div>
     <Container>
@@ -79,23 +63,7 @@ const ProfilePage = async () => {
           justifyContent={"space-evenly"}
           alignItems={"center"}
         >
-          <AccountCircleRounded
-            // fontSize="large"
-            sx={{
-              fontSize: "100px",
-            }}
-          />
-          <Box color={"black"}>
-            <Typography color={"black"} fontSize={"18px"} fontWeight={"bold"}>
-              {profile?.name}
-            </Typography>
-            <Typography color="primary.main">
-              Email: {profile?.email}
-            </Typography>
-            <Typography color="primary.main" marginBottom={2}>
-              Contact: {profile?.contactNumber}
-            </Typography>
-          </Box>
+          <UserProfileUI profile={profile as IProfile} />
         </Stack>
         <Box>
           <EditProfile
@@ -105,7 +73,9 @@ const ProfilePage = async () => {
           />
         </Box>
       </Stack>
-
+      <Box>
+        <ChangePassword />
+      </Box>
       <Typography
         width={"100%"}
         my={4}

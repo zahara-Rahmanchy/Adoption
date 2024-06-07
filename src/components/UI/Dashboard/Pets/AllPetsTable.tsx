@@ -12,9 +12,10 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
 import React from "react";
 
-const AllPetsTable = ({pets}: IPetData) => {
+const AllPetsTable = ({pets}: {pets: IPetData}) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -114,9 +115,9 @@ const AllPetsTable = ({pets}: IPetData) => {
                 </Button>
               </TableCell>
               <TableCell component="th" scope="row">
-                <Button onClick={() => handleDeletePet(value?.id)} size="small">
+                {/* <Button onClick={() => handleDeletePet(value?.id)} size="small">
                   <DeleteSweep />
-                </Button>
+                </Button> */}
               </TableCell>
             </TableRow>
           ))}

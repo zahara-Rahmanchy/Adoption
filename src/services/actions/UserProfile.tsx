@@ -4,6 +4,7 @@ import {authKey} from "@/constants/authkey";
 import getEnvVariable from "@/utils/getEnvVariable";
 import {cookies} from "next/headers";
 import {storeUserInfo} from "../auth.services";
+import {IProfile} from "@/components/UI/Profile/UserProfileUI";
 
 const UserProfile = async () => {
   const accessToken = cookies().get(authKey)?.value;

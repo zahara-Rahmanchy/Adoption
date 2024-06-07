@@ -197,21 +197,31 @@ const AllPets = () => {
         </p>
       )}
 
-      <Grid container rowSpacing={5} justifyContent="center" marginTop="10px">
+      <Grid
+        width={"100%"}
+        // gap={1}
+        mx={"auto"}
+        container
+        rowSpacing={5}
+        justifyContent="center"
+        marginTop="10px"
+      >
         {pets.map((pet: any) => (
           <Grid
+            width={"100%"}
             key={pet.id}
             item
             xs={12}
-            sm={6}
+            sm={12}
             lg={4}
             textAlign={"center"}
             justifyContent={"center"}
+            alignItems={"center"}
             zIndex={5}
           >
             <Card
               sx={{
-                maxWidth: 345,
+                maxWidth: {xs: "100%", lg: 345},
                 justifyContent: "center",
                 textAlign: "center",
                 maxHeight: "fit-content",

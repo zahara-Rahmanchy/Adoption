@@ -17,6 +17,7 @@ import {useRouter} from "next/navigation";
 type Inputs = {
   name: string;
   email: string;
+  contactNumber: string;
   password: string;
   conpassword: string;
 };
@@ -117,6 +118,23 @@ const RegisterPage = () => {
                 {errors.email && (
                   <span className="text-red-500 text-xs m-1">
                     {errors.email.message}
+                  </span>
+                )}
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <TextField
+                  type="text"
+                  id="standard-basic"
+                  label="Contact Number"
+                  variant="standard"
+                  fullWidth={true}
+                  {...register("contactNumber", {
+                    required: "Contact Number is required!",
+                  })}
+                />
+                {errors.contactNumber && (
+                  <span className="text-red-500 text-xs m-1">
+                    {errors.contactNumber.message}
                   </span>
                 )}
               </Grid>
