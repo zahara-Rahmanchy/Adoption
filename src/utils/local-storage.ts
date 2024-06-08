@@ -31,6 +31,6 @@ export const removeFromLocalStorage = (key: string) => {
   if (!key || typeof window === "undefined") {
     return "";
   }
-  console.log("del: ", deleteCookie(key));
+  // console.log("del: ", deleteCookie(key));
   return deleteCookie(key);
 };

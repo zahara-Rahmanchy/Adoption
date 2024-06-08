@@ -50,7 +50,7 @@ const UsersPage = () => {
       }
     );
     const data = await res.json();
-    console.log("user data: ", data);
+    // console.log("user data: ", data);
     setUsers(data.data);
   };
 
@@ -65,14 +65,14 @@ const UsersPage = () => {
     const data = {
       [key]: value,
     };
-    console.log("data: ", data);
+    // console.log("data: ", data);
     if (confirmed) {
       try {
         setLoading(true);
         const res = await EditUserProfile(data, accessToken as string, id);
         console.log(res);
         if (res?.success) {
-          console.log("res.success: ", res.success);
+          // console.log("res.success: ", res.success);
           fetchUsers();
           toast.success(res?.message);
         } else {
@@ -89,7 +89,7 @@ const UsersPage = () => {
     fetchUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("users: ");
+  // console.log("users: ");
   return (
     <>
       <Backdrop

@@ -10,7 +10,6 @@ import React from "react";
 import {toast} from "sonner";
 
 const AuthButtons = () => {
-  console.log("aith k", getCookie(authKey));
   const userData: any = getUserInfo();
   const router = useRouter();
   const handleLogout = () => {

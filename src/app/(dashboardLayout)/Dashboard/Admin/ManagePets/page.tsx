@@ -44,7 +44,7 @@ const ManagePetPage = () => {
       }
     );
     const data = await res.json();
-    console.log("pet data: ", data);
+    // console.log("pet data: ", data);
     setPets(data.data);
   };
 
@@ -88,7 +88,7 @@ const ManagePetPage = () => {
     fetchPets();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("pets: ", pets);
+  // console.log("pets: ", pets);
   return (
     <>
       <TableContainer component={Paper}>

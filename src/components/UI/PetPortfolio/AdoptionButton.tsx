@@ -28,7 +28,7 @@ const AdoptionButton = ({
 }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log("scrren: ", isSmallScreen);
+  // console.log("scrren: ", isSmallScreen);
   return (
     <Container>
       <Grid

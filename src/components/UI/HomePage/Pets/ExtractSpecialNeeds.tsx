@@ -19,7 +19,7 @@ const ExtractSpecialNeeds = async (): Promise<string[]> => {
       }
     });
     const specialNeeds = Array.from(specialNeedsList);
-    console.log("specialNeeds", specialNeeds);
+    // console.log("specialNeeds", specialNeeds);
     return specialNeeds;
   } catch (err) {
     console.log(err);

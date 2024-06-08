@@ -14,9 +14,7 @@ import {cookies} from "next/headers";
 const PortfolioPage = async ({params}: petId) => {
   const accessToken = cookies().get(authKey)?.value;
 
-  console.log("accessToken: ", accessToken);
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  console.log("url", url);
 
   // try{
   const res = await fetch(`${url}/pets/${params.petId}`, {

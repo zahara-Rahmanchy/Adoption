@@ -95,8 +95,8 @@ const AllPets = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, gender, size, specialNeeds]);
-  console.log("searchterm: ", searchTerm);
-  console.log("needs: ", specialNeedsArray);
+  // console.log("searchterm: ", searchTerm);
+  // console.log("needs: ", specialNeedsArray);
 
   return (
     <Container

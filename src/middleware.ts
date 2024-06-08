@@ -13,15 +13,13 @@ const roleBasedPrivateRoutes = {
 
 export function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
-  console.log("path:", pathname);
+  // console.log("path:", pathname);
   const accessToken = cookies().get("accessToken")?.value;
 
   if (!accessToken) {
-    console.log("no token!!!!!!!!!!!!!!!!!!!!!");
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next();
     } else {
-      console.log("hellllldlk");
       return NextResponse.redirect(new URL("/Login", request.url));
     }
   }

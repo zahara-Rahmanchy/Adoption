@@ -50,7 +50,7 @@ const AdoptionPage = ({params}: petId) => {
         petdata as AdoptionData,
         String(accessToken)
       );
-      console.log(res);
+      // console.log(res);
 
       if (res?.data) {
         toast.success(res?.message);
@@ -61,7 +61,7 @@ const AdoptionPage = ({params}: petId) => {
         router.back();
       }
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
       router.back();
     } finally {

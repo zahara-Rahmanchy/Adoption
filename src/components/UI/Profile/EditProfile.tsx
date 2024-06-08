@@ -47,9 +47,9 @@ const EditProfile: FC<props> = ({accessToken}) => {
     // console.log("Sanitized", data);
     try {
       const res = await EditUserProfile(data, accessToken, userInfo?.id);
-      console.log(res);
+      // console.log(res);
       if (res?.success) {
-        console.log("res.success: ", res.success);
+        // console.log("res.success: ", res.success);
         reset();
         router.refresh();
 

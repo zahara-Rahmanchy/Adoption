@@ -31,11 +31,11 @@ const LoginPage = () => {
 
   const onSubmit: SubmitHandler<LoginInputs> = async data => {
     setLoading(true);
-    console.log(data);
+    // console.log(data);
 
     try {
       const res = await LoginUser(data);
-      console.log(res);
+
       if (res?.data?.token) {
         storeUserInfo(res.data.token);
         router.push("/");
@@ -44,8 +44,8 @@ const LoginPage = () => {
       } else {
         toast.error(res.message);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      toast.error(err.message as string);
     } finally {
       setLoading(false);
     }

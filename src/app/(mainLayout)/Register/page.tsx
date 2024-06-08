@@ -31,15 +31,17 @@ const RegisterPage = () => {
   } = useForm<Inputs>();
   const password = watch("password");
   const onSubmit: SubmitHandler<Inputs> = async data => {
-    console.log(data);
+    // console.log(data);
     const {conpassword, ...userInfo} = data;
     console.log(userInfo);
     try {
       const res = await RegisterUser(userInfo);
-      console.log(res);
+      // console.log(res);
       if (res?.data?.id) {
         toast.success(res?.message);
         router.push("/Login");
+      } else {
+        toast.error(res?.message);
       }
     } catch (err) {
       console.log(err);

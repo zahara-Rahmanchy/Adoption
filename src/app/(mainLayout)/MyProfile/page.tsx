@@ -23,7 +23,7 @@ const ProfilePage = async () => {
   const accessToken = cookies().get(authKey)?.value;
 
   const profile = await UserProfile();
-  console.log(profile);
+  // console.log(profile);
 
   return (
     // <div>hkj</div>

@@ -20,10 +20,10 @@ export const storeUserInfo = (token: string) => {
 
 export const getUserInfo = () => {
   const authToken = getFromCookiesClient(authKey);
-  console.log(authToken);
+
   if (authToken) {
     const decodedData = DecodeToken(authToken);
-    console.log(decodedData as IjwtPayload);
+
     return decodedData as IjwtPayload;
   }
 };
@@ -35,10 +35,10 @@ export const getUserRole = () => {
 
   // return role;
   const authToken = getFromCookiesClient(authKey);
-  console.log(authToken);
+
   if (authToken) {
     const decodedData = DecodeToken(authToken) as IjwtPayload;
-    console.log(decodedData as IjwtPayload);
+
     decodedData as IjwtPayload;
     return decodedData.role;
   }

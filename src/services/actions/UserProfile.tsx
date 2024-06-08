@@ -9,7 +9,7 @@ import {IProfile} from "@/components/UI/Profile/UserProfileUI";
 const UserProfile = async () => {
   const accessToken = cookies().get(authKey)?.value;
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  console.log("url: ", url);
+
   const res = await fetch(`${url}/profile`, {
     method: "GET",
     headers: {

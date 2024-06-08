@@ -43,17 +43,17 @@ const AddPetPage = () => {
 
   const onSubmit: SubmitHandler<IPetDataInput> = async data => {
     setImageLoading(true);
-    console.log(data);
+    // console.log(data);
     const {specialNeed, image, age, ...rest} = data;
     const specialNeedArr = processSpecialNeed(String(specialNeed));
-    console.log("specialNeedArr", specialNeedArr);
+    // console.log("specialNeedArr", specialNeedArr);
 
     /**************** Generating image urls************************* */
     const imgFiles = Object.values(image);
 
     const urls = imgFiles.map((file, index) => uploadImage(file));
     const allImageUrls = await Promise.all(urls);
-    console.log("allurls: ", allImageUrls);
+    // console.log("allurls: ", allImageUrls);
     setImageLoading(false);
     setLoading(true);
     /**************** endGenerating image urls************************* */
@@ -64,9 +64,9 @@ const AddPetPage = () => {
         age: Number(age),
         ...rest,
       };
-      console.log("insertData: ", insertData);
+      // console.log("insertData: ", insertData);
       const res = await InsertPetData(insertData as IPetDataInsert);
-      console.log(res);
+      // console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         reset();
@@ -74,7 +74,7 @@ const AddPetPage = () => {
         toast.error(res.message);
       }
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
       toast.error(err.message as string);
     } finally {
       setLoading(false);

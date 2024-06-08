@@ -5,7 +5,7 @@ import {cookies} from "next/headers";
 
 export const LoginUser = async (userData: LoginInputs) => {
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  console.log("url: ", url);
+
   const res = await fetch(`${url}/login`, {
     method: "POST",
     headers: {

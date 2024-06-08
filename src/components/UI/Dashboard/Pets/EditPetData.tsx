@@ -45,7 +45,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const EditPetData = ({petData, open, setOpen}: any) => {
-  console.log("petData", petData.adoptionRequest);
+  // console.log("petData", petData.adoptionRequest);
   const [loading, setLoading] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -65,7 +65,7 @@ const EditPetData = ({petData, open, setOpen}: any) => {
   } = useForm<Partial<IPetDataInput>>();
 
   const onSubmit: SubmitHandler<Partial<IPetDataInput>> = async data => {
-    console.log("upd data:", data);
+    // console.log("upd data:", data);
 
     for (let key in data) {
       if (
@@ -78,12 +78,11 @@ const EditPetData = ({petData, open, setOpen}: any) => {
         delete data.image;
       }
     }
-    console.log("del: ", data);
+
     const {specialNeed, image, age, ...rest} = data;
     let specialNeedArr;
     if (specialNeed) {
       specialNeedArr = processSpecialNeed(String(specialNeed));
-      console.log("specialNeedArr", specialNeedArr);
     }
     let allImageUrls;
     /**************** Generating image urls************************* */
@@ -93,7 +92,7 @@ const EditPetData = ({petData, open, setOpen}: any) => {
 
       const urls = imgFiles.map((file, index) => uploadImage(file));
       allImageUrls = await Promise.all(urls);
-      console.log("allurls: ", allImageUrls);
+      // console.log("allurls: ", allImageUrls);
       setImageLoading(false);
     }
 
@@ -106,9 +105,9 @@ const EditPetData = ({petData, open, setOpen}: any) => {
         age: Number(age),
         ...rest,
       };
-      console.log("insertData: ", insertData);
+      // console.log("insertData: ", insertData);
       const res = await updatePetData(insertData as IPetDataInsert, petData.id);
-      console.log(res);
+      // console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         reset();
@@ -118,7 +117,7 @@ const EditPetData = ({petData, open, setOpen}: any) => {
         setLoading(false);
       }
     } catch (err: any) {
-      console.log(err);
+      // console.log(err);
       toast.error(err.message as string);
       setLoading(false);
     } finally {
