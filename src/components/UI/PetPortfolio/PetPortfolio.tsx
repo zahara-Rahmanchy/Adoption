@@ -252,7 +252,7 @@ const PetPortfolio = ({
                   <Box color="primary.main" component="span" fontWeight="bold">
                     Health Status:{" "}
                   </Box>
-                  {pet.medicalHistory}
+                  {pet.healthStatus}
                 </Typography>
               </Stack>
             </Box>

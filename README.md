@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pet Adoption System- PawFectMatch
 
-## Getting Started
+### Tech Stack
 
-First, run the development server:
+    Frontend
+    - Typescript
+    - Next JS
+    - Material UI
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    Backend
+    - Express JS
+    - Node JS
+    - Postgres
+    - Prisma
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Description & Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    - The Pet Adoption System:PawFectMatch is an application which helps adoption process
+      of animals. It connects users to potential adopters. Admins can store pet informations and registered request for pet adoption.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    - Users can register using name,email and password.
 
-## Learn More
+    - Authentication is done using jwt for secure authentication and authorization.
 
-To learn more about Next.js, take a look at the following resources:
+    - Admins can add their pet details,get pet details ,update them or delete them.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    - Users can make adoption requests which includes information about user,     petId and pet ownership experience and status of the request.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    - The status of the adoption request is updated based on the user by the admin,updating status to rejected,accepted or default value which is pending.
 
-## Deploy on Vercel
+    - Users can view and update their user profile information.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    - Users can change their password and view their adopted pet listing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## To run the file locally perform the following steps
+
+### Clone the repository using the command
+
+    - git clone https://github.com/Porgramming-Hero-web-course/l2-b2-fullstack-track-assignment-8-zahara-Rahmanchy.git
+    - cd my-repo
+    - npm install
+
+### Create a .env file and add the following url to use the backend
+
+    - NEXT_PUBLIC_BACKEND_URL=https://assignment-8-cyan.vercel.app/api
+
+### Use the following command to start the application
+
+    - npm run build
+    - npm run start or npm run dev
+
+### Live Link
+
+- https://assignment-8-cyan.vercel.app

@@ -165,7 +165,7 @@ const ManagePetPage = () => {
                   {value?.adoptedStatus as string}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {value?.medicalHistory as string}
+                  {value?.healthStatus as string}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {value?.adoptionRequirements as string}

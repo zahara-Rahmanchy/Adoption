@@ -1,39 +1,68 @@
-// "use server";
-import {authKey} from "@/constants/authkey";
+import {jwtDecode} from "jwt-decode";
 import {cookies} from "next/headers";
 import {NextResponse} from "next/server";
 import type {NextRequest} from "next/server";
-import {IjwtPayload, getUserRole} from "./services/auth.services";
-import {DecodeToken} from "./utils/jwt";
+
+type Role = keyof typeof roleBasedPrivateRoutes;
+
+const AuthRoutes = ["/Login", "/Register"];
+const commonPrivateRoutes = ["/MyProfile"];
+const roleBasedPrivateRoutes = {
+  Admin: [/^\/Dashboard\/Admin/],
+};
 
 export function middleware(request: NextRequest) {
-  console.log("req", request);
-  const accessToken = cookies().get(authKey)?.value;
-  // role === "Admin" &&
-  const decodedData = DecodeToken(accessToken as string) as IjwtPayload;
-  console.log(decodedData as IjwtPayload);
-  decodedData as IjwtPayload;
-  const role = decodedData.role;
+  const {pathname} = request.nextUrl;
+  console.log("path:", pathname);
+  const accessToken = cookies().get("accessToken")?.value;
 
   if (!accessToken) {
-    return NextResponse.redirect(new URL("/Login", request.url));
+    console.log("no token!!!!!!!!!!!!!!!!!!!!!");
+    if (AuthRoutes.includes(pathname)) {
+      return NextResponse.next();
+    } else {
+      console.log("hellllldlk");
+      return NextResponse.redirect(new URL("/Login", request.url));
+    }
   }
-  console.log({accessToken}, {role});
+
   if (
     accessToken &&
-    role === "Admin" &&
-    request.nextUrl.pathname.startsWith("/Dashboard")
+    (commonPrivateRoutes.includes(pathname) ||
+      commonPrivateRoutes.some(route => pathname.startsWith(route)))
   ) {
     return NextResponse.next();
   }
 
-  //   if (request.nextUrl.pathname.startsWith("/Dashboard")) {
-  //     return NextResponse.rewrite(new URL("/Login", request.url));
-  //   }
+  let decodedData = null;
+
+  if (accessToken) {
+    decodedData = jwtDecode(accessToken) as any;
+  }
+
+  const role = decodedData?.role;
+
+  // if (role === 'ADMIN' && pathname.startsWith('/dashboard/admin')) {
+  //    return NextResponse.next();
+  // }
+
+  if (role && roleBasedPrivateRoutes[role as Role]) {
+    const routes = roleBasedPrivateRoutes[role as Role];
+    if (routes.some(route => pathname.match(route))) {
+      return NextResponse.next();
+    }
+  }
 
   return NextResponse.redirect(new URL("/", request.url));
 }
 
 export const config = {
-  matcher: ["/Dashboard/Admin/:page*", "/PetPortfolio/:page", "/MyProfile"],
+  matcher: [
+    "/Login",
+    "/Register",
+    "/MyProfile",
+    "/Dashboard/:page*",
+    "/PetPortfolio/:page*",
+    "/AdoptionRequest/:page*",
+  ],
 };

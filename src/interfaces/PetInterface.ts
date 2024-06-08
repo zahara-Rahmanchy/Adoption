@@ -12,7 +12,7 @@ export interface IPetData {
   description: string;
   temperament: string;
   adoptedStatus: string;
-  medicalHistory: string;
+  healthStatus: string;
   adoptionRequirements: string;
   createdAt: string;
   updatedAt: string;
@@ -32,7 +32,7 @@ export interface IPetDataInput {
   description: string;
   temperament: string;
 
-  medicalHistory: string;
+  healthStatus: string;
   adoptionRequirements: string;
 }
 export interface IPetDataInsert {
@@ -48,7 +48,7 @@ export interface IPetDataInsert {
   description: string;
   temperament: string;
 
-  medicalHistory: string;
+  healthStatus: string;
   adoptionRequirements: string;
 }
 export interface IApiResponse {

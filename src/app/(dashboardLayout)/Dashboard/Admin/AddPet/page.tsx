@@ -319,8 +319,8 @@ const AddPetPage = () => {
                   label="health Status"
                   variant="standard"
                   fullWidth={true}
-                  {...register("medicalHistory", {
-                    required: "medicalHistory is required!",
+                  {...register("healthStatus", {
+                    required: "healthStatus is required!",
                   })}
                 />
                 {errors.temperament && (

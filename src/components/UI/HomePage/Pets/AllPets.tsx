@@ -28,6 +28,7 @@ import getEnvVariable from "@/utils/getEnvVariable";
 import {getUserInfo, isLoggedIn} from "@/services/auth.services";
 import {getFromCookiesClient} from "@/utils/local-storage";
 import {authKey} from "@/constants/authkey";
+import {toast} from "sonner";
 
 const AllPets = () => {
   const router = useRouter();
@@ -196,197 +197,204 @@ const AllPets = () => {
           <CircularProgress color="inherit" />
         </p>
       )}
-
-      <Grid
-        width={"100%"}
-        // gap={1}
-        mx={"auto"}
-        container
-        rowSpacing={5}
-        justifyContent="center"
-        marginTop="10px"
-      >
-        {pets.map((pet: any) => (
-          <Grid
-            width={"100%"}
-            key={pet.id}
-            item
-            xs={12}
-            sm={12}
-            lg={4}
-            textAlign={"center"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            zIndex={5}
-          >
-            <Card
-              sx={{
-                maxWidth: {xs: "100%", lg: 345},
-                justifyContent: "center",
-                textAlign: "center",
-                maxHeight: "fit-content",
-                height: 500,
-
-                backgroundColor: "white",
-              }}
+      {pets !== undefined ? (
+        <Grid
+          width={"100%"}
+          // gap={1}
+          mx={"auto"}
+          container
+          rowSpacing={5}
+          justifyContent="center"
+          marginTop="10px"
+        >
+          {pets.map((pet: any) => (
+            <Grid
+              width={"100%"}
+              key={pet.id}
+              item
+              xs={12}
+              sm={12}
+              lg={4}
+              textAlign={"center"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              zIndex={5}
             >
-              <CardMedia
+              <Card
                 sx={{
-                  display: "flex",
+                  maxWidth: {xs: "100%", lg: 345},
                   justifyContent: "center",
-                  paddingTop: "10px",
+                  textAlign: "center",
+                  maxHeight: "fit-content",
+                  height: 500,
+
+                  backgroundColor: "white",
                 }}
               >
-                <Image
-                  src={pet.image[0]}
-                  alt={`${pet.species} image`}
-                  width={300}
-                  height={0}
-                  style={{objectFit: "cover"}}
-                />
-                {/* title={pet.species + "img"} */}
-              </CardMedia>
-              <CardContent>
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  px="10px"
+                <CardMedia
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingTop: "10px",
+                  }}
                 >
-                  <Typography
-                    gutterBottom
-                    variant="h1"
-                    component="div"
-                    color="primary.main"
-                    sx={{fontSize: "25px", margin: 0, padding: "0"}}
+                  <Image
+                    src={pet.image[0]}
+                    alt={`${pet.species} image`}
+                    width={300}
+                    height={0}
+                    style={{objectFit: "cover"}}
+                  />
+                  {/* title={pet.species + "img"} */}
+                </CardMedia>
+                <CardContent>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    px="10px"
                   >
-                    {pet.name}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontSize: "17px",
-                      fontWeight: "bold",
-                    }}
-                    color="secondary.dark"
-                  >
-                    <FmdGoodOutlinedIcon
+                    <Typography
+                      gutterBottom
+                      variant="h1"
+                      component="div"
+                      color="primary.main"
+                      sx={{fontSize: "25px", margin: 0, padding: "0"}}
+                    >
+                      {pet.name}
+                    </Typography>
+                    <Typography
+                      variant="h6"
                       sx={{
-                        marginRight: "5px",
-                      }}
-                    />
-                    {pet.location}
-                  </Typography>
-                </Box>
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  px="10px"
-                  marginTop={4}
-                >
-                  <Typography
-                    gutterBottom
-                    variant="body1"
-                    component="div"
-                    // color="black"
-                    sx={{
-                      fontSize: "14px",
-                    }}
-                  >
-                    <Box
-                      component="span"
-                      // color="#865C97"
-                      sx={{
-                        fontSize: "14px",
+                        fontSize: "17px",
+                        fontWeight: "bold",
                       }}
                       color="secondary.dark"
                     >
-                      Size:
-                    </Box>
-                    {"   "}
-                    {pet.size}
-                  </Typography>
-                  <Typography
-                    gutterBottom
-                    variant="body1"
-                    component="div"
-                    // color="black"
-                    sx={{
-                      fontSize: "14px",
-                    }}
+                      <FmdGoodOutlinedIcon
+                        sx={{
+                          marginRight: "5px",
+                        }}
+                      />
+                      {pet.location}
+                    </Typography>
+                  </Box>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    px="10px"
+                    marginTop={4}
                   >
-                    <Box
-                      component="span"
-                      // color="#865C97"
-                      sx={{
-                        fontSize: "14px",
-                      }}
-                      color="secondary.dark"
-                    >
-                      Breed:
-                    </Box>
-                    {"   "}
-                    {pet.breed}
-                  </Typography>
-                  <Typography
-                    gutterBottom
-                    variant="body1"
-                    component="div"
-                    // color="black"
-                    sx={{
-                      fontSize: "15px",
-                    }}
-                  >
-                    <Box
-                      component="span"
-                      color="secondary.dark"
+                    <Typography
+                      gutterBottom
+                      variant="body1"
+                      component="div"
+                      // color="black"
                       sx={{
                         fontSize: "14px",
                       }}
                     >
-                      Age:
-                    </Box>
-                    {"   "}
-                    {pet.age}
-                  </Typography>
-                </Box>
-                <hr />
-                <Typography
-                  variant="body1"
-                  sx={{fontSize: "13px", my: 1}}
-                  color="body1"
-                >
-                  {pet.description}
-                </Typography>
-              </CardContent>
-              <CardActions
-                sx={{
-                  display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "center",
-                }}
-              >
-                <Link href={isLoggedIn() ? `PetPortfolio/${pet.id}` : `/Login`}>
-                  <Button
-                    variant="contained"
-                    // color="primary.main"
-                    sx={{
-                      height: "30px",
-                      width: "110px",
-                      fontSize: "10px",
-                      backgroundcolor: "#f7d588",
-                      marginBottom: 2,
-                    }}
+                      <Box
+                        component="span"
+                        // color="#865C97"
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                        color="secondary.dark"
+                      >
+                        Size:
+                      </Box>
+                      {"   "}
+                      {pet.size}
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="body1"
+                      component="div"
+                      // color="black"
+                      sx={{
+                        fontSize: "14px",
+                      }}
+                    >
+                      <Box
+                        component="span"
+                        // color="#865C97"
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                        color="secondary.dark"
+                      >
+                        Breed:
+                      </Box>
+                      {"   "}
+                      {pet.breed}
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="body1"
+                      component="div"
+                      // color="black"
+                      sx={{
+                        fontSize: "15px",
+                      }}
+                    >
+                      <Box
+                        component="span"
+                        color="secondary.dark"
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                      >
+                        Age:
+                      </Box>
+                      {"   "}
+                      {pet.age}
+                    </Typography>
+                  </Box>
+                  <hr />
+                  <Typography
+                    variant="body1"
+                    sx={{fontSize: "13px", my: 1}}
+                    color="body1"
                   >
-                    Learn More
-                  </Button>
-                </Link>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                    {pet.description}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link
+                    href={isLoggedIn() ? `PetPortfolio/${pet.id}` : `/Login`}
+                  >
+                    <Button
+                      variant="contained"
+                      // color="primary.main"
+                      sx={{
+                        height: "30px",
+                        width: "110px",
+                        fontSize: "10px",
+                        backgroundcolor: "#f7d588",
+                        marginBottom: 2,
+                      }}
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Typography textAlign={"center"} fontSize={"20px"} color={"purple"}>
+          No pet data
+        </Typography>
+      )}
     </Container>
   );
 };

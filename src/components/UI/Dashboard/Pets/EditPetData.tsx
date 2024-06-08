@@ -430,10 +430,10 @@ const EditPetData = ({petData, open, setOpen}: any) => {
                   <Grid item xs={12} md={3}>
                     <TextField
                       id="standard-basic"
-                      label={`Health Status: ${petData.medicalHistory}`}
+                      label={`Health Status: ${petData.healthStatus}`}
                       variant="standard"
                       fullWidth={true}
-                      {...register("medicalHistory", {
+                      {...register("healthStatus", {
                         //required: "medicalHistory is //required!",
                       })}
                     />
