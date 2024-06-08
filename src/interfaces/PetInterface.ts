@@ -35,7 +35,22 @@ export interface IPetDataInput {
   medicalHistory: string;
   adoptionRequirements: string;
 }
+export interface IPetDataInsert {
+  name: string;
+  image: string[];
+  species: string;
+  breed: string;
+  age: number;
+  size: string;
+  specialNeeds: string[];
+  gender: string;
+  location: string;
+  description: string;
+  temperament: string;
 
+  medicalHistory: string;
+  adoptionRequirements: string;
+}
 export interface IApiResponse {
   success: boolean;
   statusCode: number;

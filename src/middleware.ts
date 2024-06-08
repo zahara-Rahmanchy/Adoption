@@ -35,5 +35,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/Dashboard/:path*", "/PetPortfolio/:path"],
+  matcher: ["/Dashboard/Admin/:page*", "/PetPortfolio/:page", "/MyProfile"],
 };

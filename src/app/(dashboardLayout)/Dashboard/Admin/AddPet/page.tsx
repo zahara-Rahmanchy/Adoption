@@ -20,37 +20,16 @@ import {
 } from "@mui/material";
 import {useRouter} from "next/navigation";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {IPetData, IPetDataInput} from "@/interfaces/PetInterface";
+import {
+  IPetData,
+  IPetDataInput,
+  IPetDataInsert,
+} from "@/interfaces/PetInterface";
 import {toast} from "sonner";
 import {InsertPetData} from "@/services/actions/AddPetData";
-const imageHostingURL = `https://api.imgbb.com/1/upload?key=37a2599227bbd15acf633f5a71ece5e2`;
-function processSpecialNeed(input: string): String[] {
-  if (input.trim().toLowerCase() === "none") {
-    return ["none"];
-  }
-  return input.trim().split(",");
-}
-const uploadImage = async (image: any) => {
-  const formD = new FormData();
-  console.log("image: ", image);
-  formD.append(`image`, image);
-  try {
-    const res = await fetch(imageHostingURL, {
-      method: "POST",
-      body: formD,
-    });
-    const imgs = await res.json();
-    console.log("imgs: ", imgs);
-    if (imgs.success) {
-      return imgs.data.display_url;
-    } else {
-      throw new Error("failed to upload");
-    }
-  } catch (err) {
-    console.log(err);
-    toast.error(err as any);
-  }
-};
+import {uploadImage} from "@/utils/uploadImage";
+import {processSpecialNeed} from "@/utils/processSpecialNeed";
+
 const AddPetPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -68,6 +47,7 @@ const AddPetPage = () => {
     const {specialNeed, image, age, ...rest} = data;
     const specialNeedArr = processSpecialNeed(String(specialNeed));
     console.log("specialNeedArr", specialNeedArr);
+
     /**************** Generating image urls************************* */
     const imgFiles = Object.values(image);
 
@@ -85,7 +65,7 @@ const AddPetPage = () => {
         ...rest,
       };
       console.log("insertData: ", insertData);
-      const res = await InsertPetData(insertData);
+      const res = await InsertPetData(insertData as IPetDataInsert);
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);

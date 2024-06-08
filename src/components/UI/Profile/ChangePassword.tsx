@@ -149,7 +149,7 @@ const ChangePassword = () => {
                       onClick={() => setViewNew(!viewNew)}
                       edge="end"
                     >
-                      {view ? <VisibilityOff /> : <Visibility />}
+                      {viewNew ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),

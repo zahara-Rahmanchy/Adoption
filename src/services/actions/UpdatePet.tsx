@@ -4,12 +4,15 @@ import {IPetDataInput, IPetDataInsert} from "@/interfaces/PetInterface";
 import getEnvVariable from "@/utils/getEnvVariable";
 import {cookies} from "next/headers";
 
-export const InsertPetData = async (petData: IPetDataInsert) => {
+export const updatePetData = async (
+  petData: Partial<IPetDataInsert>,
+  petId: string
+) => {
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
   console.log("url: ", url);
   const accessToken = cookies().get(authKey)?.value;
-  const res = await fetch(`${url}/pets`, {
-    method: "POST",
+  const res = await fetch(`${url}/pets/${petId}`, {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: accessToken ? accessToken : "",
@@ -17,9 +20,9 @@ export const InsertPetData = async (petData: IPetDataInsert) => {
     body: JSON.stringify(petData),
     cache: "no-store",
   });
-  const petInfo = await res.json();
+  const userInfo = await res.json();
   // if (userInfo.data.accessToken) {
   //   cookies().set("accessToken", userInfo?.data?.token);
   // }
-  return petInfo;
+  return userInfo;
 };

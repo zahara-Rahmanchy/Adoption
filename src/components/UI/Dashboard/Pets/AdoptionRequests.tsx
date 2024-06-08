@@ -26,7 +26,7 @@ const tableHeads = [
   "Accept",
   "Reject",
 ];
-const AdoptionRequests = ({adoptionRequests}: any) => {
+const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
   console.log("adoptionR", adoptionRequests);
   const router = useRouter();
   const accessToken = getFromCookiesClient(authKey);
@@ -65,8 +65,13 @@ const AdoptionRequests = ({adoptionRequests}: any) => {
       );
       const data = await res.json();
       if (data.success) {
-        toast.success("Updated Successfully");
+        toast.success(
+          `Adoption Request ${
+            params === "APPROVED" ? "accepted successfully!" : "rejected!"
+          }`
+        );
         router.refresh();
+        setOpen(false);
         router.push("/Dashboard/Admin/ManagePets");
 
         // fetchPets();
@@ -76,7 +81,7 @@ const AdoptionRequests = ({adoptionRequests}: any) => {
     }
   };
   return (
-    <Container>
+    <Container sx={{marginBottom: "100px"}}>
       <Typography
         variant="h5"
         color="primary.main"
