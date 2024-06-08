@@ -55,7 +55,7 @@ const AllPets = () => {
     setGender(event.target.value);
   };
   const handleFilterNeeds = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setSpecialNeeds(event.target.value);
   };
 
@@ -83,8 +83,9 @@ const AllPets = () => {
 
         const specialNeedsList = await ExtractSpecialNeeds();
         setSpecialNeedsArray(specialNeedsList);
-        console.log("specialNeedsList: ", specialNeedsList);
-      } catch (err) {
+        // console.log("specialNeedsList: ", specialNeedsList);
+      } catch (err: any) {
+        toast.error(err?.message);
         console.log(err);
       } finally {
         setLoading(false);
@@ -102,8 +103,6 @@ const AllPets = () => {
       sx={{
         // padding: "50px",
         marginTop: "100px",
-        // backgroundColor: "#F7D588",
-        // clipPath: "polygon(0 0,100% 2%,100% 100%,0 100%)",
       }}
     >
       <Typography

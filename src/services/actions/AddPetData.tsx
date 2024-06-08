@@ -6,7 +6,7 @@ import {cookies} from "next/headers";
 
 export const InsertPetData = async (petData: IPetDataInsert) => {
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  console.log("url: ", url);
+  // console.log("url: ", url);
   const accessToken = cookies().get(authKey)?.value;
   const res = await fetch(`${url}/pets`, {
     method: "POST",
@@ -18,8 +18,6 @@ export const InsertPetData = async (petData: IPetDataInsert) => {
     cache: "no-store",
   });
   const petInfo = await res.json();
-  // if (userInfo.data.accessToken) {
-  //   cookies().set("accessToken", userInfo?.data?.token);
-  // }
+
   return petInfo;
 };

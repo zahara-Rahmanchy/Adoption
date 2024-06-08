@@ -36,14 +36,14 @@ const EditProfile: FC<props> = ({accessToken}) => {
 
   const onSubmit: SubmitHandler<any> = async data => {
     setLoading(true);
-    console.log(data);
+    // console.log(data);
 
     for (let key in data) {
       if (data[key] === "" || data[key] === undefined || data[key] === null)
         delete data[key];
     }
 
-    console.log("Sanitized", data);
+    // console.log("Sanitized", data);
     try {
       const res = await EditUserProfile(data, accessToken, userInfo?.id);
       console.log(res);

@@ -27,7 +27,7 @@ const tableHeads = [
   "Reject",
 ];
 const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
-  console.log("adoptionR", adoptionRequests);
+  // console.log("adoptionR", adoptionRequests);
   const router = useRouter();
   const accessToken = getFromCookiesClient(authKey);
   //   const {adoptionRequest} = adoptionRequests;
@@ -49,7 +49,7 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
       petId: petId,
       status: params,
     };
-    console.log("upd: ", updata);
+    // console.log("upd: ", updata);
     if (confirmed) {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/adoption-requests/${id}`,

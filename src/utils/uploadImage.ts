@@ -17,6 +17,5 @@ export const uploadImage = async (image: any) => {
     }
   } catch (err) {
     console.log(err);
-    toast.error(err as any);
   }
 };

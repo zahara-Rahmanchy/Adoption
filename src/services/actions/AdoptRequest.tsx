@@ -2,14 +2,11 @@
 
 import getEnvVariable from "@/utils/getEnvVariable";
 
-// import {getFromLocalStorage} from "@/utils/local-storage";
-
 export type AdoptionData = {
   petId: string;
   petOwnershipExperience: string;
 };
-// const token = getFromLocalStorage("accessToken");
-// console.log(token);
+
 const AdoptRequest = async (
   adoptionData: AdoptionData,
   accessToken: string

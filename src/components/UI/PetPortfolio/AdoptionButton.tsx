@@ -122,30 +122,3 @@ const AdoptionButton = ({
 };
 
 export default AdoptionButton;
-{
-  /* <Stack justifyContent="center">
-        Click here to Adopt Me!
-        <Button>Adoption Request</Button>
-      </Stack>
-      <Box
-        textAlign={"right"}
-        display="flex"
-        justifyContent="center"
-        alignItems={"flex-start"}
-      >
-        <Image
-          style={{
-            marginLeft: "100px",
-            color: "purple",
-            transform: "scaleY(-1)",
-            textAlign: "right",
-          }}
-          src={
-            "https://media.tenor.com/L2XoEXWh7ewAAAAi/predicto-pointing-up.gif"
-          }
-          width={"200"}
-          height={"0"}
-          alt={""} // src="https://media.tenor.com/YFxmLLI0Og8AAAAi/kstr-kochstrasse.gif"
-        />
-      </Box> */
-}

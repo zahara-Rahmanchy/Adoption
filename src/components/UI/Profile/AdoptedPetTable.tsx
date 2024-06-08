@@ -32,10 +32,10 @@ const AdoptedPetTable = async () => {
     cache: "no-store",
   });
   const petsData = await res.json();
-  console.log("petsData: ", petsData);
+  // console.log("petsData: ", petsData);
   const adopteds = petsData.data;
 
-  console.log("adp:", adopteds);
+  // console.log("adp:", adopteds);
   return (
     <TableContainer component={Paper}>
       <Table sx={{minWidth: 650}} aria-label="simple table">

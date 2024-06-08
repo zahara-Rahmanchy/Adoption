@@ -23,10 +23,6 @@ const UserProfile = async () => {
   });
   const profileData = await res.json();
 
-  // console.log("prfofd", profileData);
-  // if (profileData.success) {
-  //   storeUserInfo(profileData.data.accessToken);
-  // }
   return profileData.data;
 };
 

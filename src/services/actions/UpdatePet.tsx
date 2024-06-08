@@ -21,8 +21,6 @@ export const updatePetData = async (
     cache: "no-store",
   });
   const userInfo = await res.json();
-  // if (userInfo.data.accessToken) {
-  //   cookies().set("accessToken", userInfo?.data?.token);
-  // }
+
   return userInfo;
 };

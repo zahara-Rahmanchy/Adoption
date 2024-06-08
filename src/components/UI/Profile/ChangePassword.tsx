@@ -40,7 +40,7 @@ const ChangePassword = () => {
   const onSubmit: SubmitHandler<any> = async data => {
     const accessToken = getFromCookiesClient(authKey);
     setLoading(true);
-    console.log(data);
+    // console.log(data);
     const confirmed = confirm(`Are you sure you want to change password?`);
     if (confirmed) {
       try {
