@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import {
   AppBar,
   Button,
+  Container,
   Dialog,
   IconButton,
   Paper,
@@ -90,9 +91,12 @@ const ManagePetPage = () => {
   }, []);
   // console.log("pets: ", pets);
   return (
-    <>
+    <Container>
       <TableContainer component={Paper}>
-        <Table sx={{minWidth: 650}} aria-label="simple table">
+        <Table
+          sx={{lg: {minWidth: 650}, xs: {maxWidth: "100%"}}}
+          aria-label="simple table"
+        >
           <TableHead
             sx={{
               bgcolor: "#f4e0fc",
@@ -214,7 +218,7 @@ const ManagePetPage = () => {
         open={open}
         // fetch={fetchPets}
       />
-    </>
+    </Container>
   );
 };
 

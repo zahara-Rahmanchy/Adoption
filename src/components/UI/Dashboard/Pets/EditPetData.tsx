@@ -23,7 +23,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {TransitionProps} from "@mui/material/transitions";
 import AdoptionRequests from "./AdoptionRequests";
@@ -36,6 +36,14 @@ import {toast} from "sonner";
 import {InsertPetData} from "@/services/actions/AddPetData";
 import {updatePetData} from "@/services/actions/UpdatePet";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+
+interface IEditProps {
+  petData: any;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  // fetchPets: () => void;
+}
+
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement;
@@ -44,8 +52,9 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const EditPetData = ({petData, open, setOpen}: any) => {
+const EditPetData: FC<IEditProps> = ({petData, open, setOpen}) => {
   // console.log("petData", petData.adoptionRequest);
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -78,7 +87,7 @@ const EditPetData = ({petData, open, setOpen}: any) => {
         delete data.image;
       }
     }
-
+    console.log("upd data:", data);
     const {specialNeed, image, age, ...rest} = data;
     let specialNeedArr;
     if (specialNeed) {
@@ -96,13 +105,17 @@ const EditPetData = ({petData, open, setOpen}: any) => {
       setImageLoading(false);
     }
 
+    let Age;
+    if (age) {
+      Age = Number(age);
+    }
     /**************** endGenerating image urls************************* */
     try {
       setLoading(true);
       const insertData = {
         specialNeeds: specialNeedArr,
         image: allImageUrls,
-        age: Number(age),
+        age: Age,
         ...rest,
       };
       // console.log("insertData: ", insertData);
@@ -111,7 +124,10 @@ const EditPetData = ({petData, open, setOpen}: any) => {
       if (res?.success) {
         toast.success(res?.message);
         reset();
-        setOpen(false);
+        // router.redirect("")
+        router.refresh();
+
+        window.location.reload();
       } else {
         toast.error(res.message);
         setLoading(false);
@@ -122,6 +138,8 @@ const EditPetData = ({petData, open, setOpen}: any) => {
       setLoading(false);
     } finally {
       setLoading(false);
+      setOpen(false);
+      router.refresh();
     }
   };
   return (

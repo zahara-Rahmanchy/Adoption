@@ -72,8 +72,8 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
         );
         router.refresh();
         setOpen(false);
-        router.push("/Dashboard/Admin/ManagePets");
-
+        router.refresh();
+        window.location.reload();
         // fetchPets();
       } else {
         toast.error(data.message);
@@ -93,7 +93,10 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
       </Typography>
       {adoptionRequests !== undefined ? (
         <TableContainer component={Paper}>
-          <Table sx={{minWidth: 650}} aria-label="simple table">
+          <Table
+            sx={{lg: {minWidth: 650}, xs: {minWidth: "100%"}}}
+            aria-label="simple table"
+          >
             <TableHead
               sx={{
                 bgcolor: "#f4e0fc",
