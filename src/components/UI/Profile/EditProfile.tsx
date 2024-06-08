@@ -32,6 +32,7 @@ const EditProfile: FC<props> = ({accessToken}) => {
     register,
     handleSubmit,
     formState: {errors},
+    reset,
   } = useForm<any>();
 
   const onSubmit: SubmitHandler<any> = async data => {
@@ -49,6 +50,7 @@ const EditProfile: FC<props> = ({accessToken}) => {
       console.log(res);
       if (res?.success) {
         console.log("res.success: ", res.success);
+        reset();
         router.refresh();
 
         toast.success(res?.message);

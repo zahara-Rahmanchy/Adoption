@@ -148,6 +148,14 @@ const RegisterPage = () => {
                   fullWidth={true}
                   {...register("password", {
                     required: "Password is required!",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be least of 6 characters",
+                    },
+                    maxLength: {
+                      value: 12,
+                      message: "Password must be at most of 12 characters",
+                    },
                   })}
                 />
                 {errors.password && (

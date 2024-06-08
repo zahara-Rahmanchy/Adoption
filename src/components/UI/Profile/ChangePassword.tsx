@@ -131,7 +131,17 @@ const ChangePassword = () => {
                   </InputAdornment>
                 ),
               }}
-              {...register("oldPassword")}
+              {...register("oldPassword", {
+                required: "Old password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be least of 6 characters",
+                },
+                maxLength: {
+                  value: 12,
+                  message: "Password must be at most of 12 characters",
+                },
+              })}
             />
             <TextField
               sx={{color: "white"}}
@@ -154,7 +164,17 @@ const ChangePassword = () => {
                   </InputAdornment>
                 ),
               }}
-              {...register("newPassword")}
+              {...register("newPassword", {
+                required: "New password is required",
+                minLength: {
+                  value: 6,
+                  message: "New Password must be least of 6 characters",
+                },
+                maxLength: {
+                  value: 12,
+                  message: "New Password must be at most of 12 characters",
+                },
+              })}
             />
             <Button
               sx={{

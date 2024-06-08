@@ -53,7 +53,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.redirect(new URL("/Login", request.url));
+  return NextResponse.redirect(new URL("/", request.url));
 }
 
 export const config = {
