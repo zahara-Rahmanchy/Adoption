@@ -6,7 +6,7 @@ import type {NextRequest} from "next/server";
 type Role = keyof typeof roleBasedPrivateRoutes;
 
 const AuthRoutes = ["/Login", "/Register"];
-const commonPrivateRoutes = ["/MyProfile"];
+const commonPrivateRoutes = ["/MyProfile", "/PetPortfolio", "/AdoptionRequest"];
 const roleBasedPrivateRoutes = {
   Admin: [/^\/Dashboard\/Admin/],
 };
@@ -53,7 +53,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.redirect(new URL("/Login", request.url));
 }
 
 export const config = {

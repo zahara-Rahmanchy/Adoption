@@ -36,7 +36,7 @@
 
 ### Clone the repository using the command
 
-    - git clone https://github.com/Porgramming-Hero-web-course/l2-b2-fullstack-track-assignment-8-zahara-Rahmanchy.git
+    - git clone https://github.com/zahara-Rahmanchy/Adoption
     - cd my-repo
     - npm install
 
@@ -51,4 +51,4 @@
 
 ### Live Link
 
-- https://assignment-8-cyan.vercel.app
+- https://adoption-three.vercel.app

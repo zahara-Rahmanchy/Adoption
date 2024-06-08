@@ -236,6 +236,8 @@ const AllPets = () => {
                     display: "flex",
                     justifyContent: "center",
                     paddingTop: "10px",
+                    // background: "blue",
+                    height: "250px",
                   }}
                 >
                   <Image
@@ -243,7 +245,7 @@ const AllPets = () => {
                     alt={`${pet.species} image`}
                     width={300}
                     height={0}
-                    style={{objectFit: "cover"}}
+                    style={{objectFit: "contain"}}
                   />
                   {/* title={pet.species + "img"} */}
                 </CardMedia>
@@ -358,7 +360,9 @@ const AllPets = () => {
                     sx={{fontSize: "13px", my: 1}}
                     color="body1"
                   >
-                    {pet.description}
+                    {pet.description.length > 100
+                      ? `${pet.description.slice(0, 100)} ...`
+                      : pet.description}
                   </Typography>
                 </CardContent>
                 <CardActions

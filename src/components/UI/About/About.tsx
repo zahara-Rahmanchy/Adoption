@@ -27,12 +27,21 @@ const About = () => {
         <Typography color="primary.main" variant="h4" fontWeight={"bold"}>
           About US
         </Typography>
-        <Typography>
-          Our mission is to provide exceptional pet care and create a community
-          for pet lovers to share and discover the best resources for their
-          furry friends. We are dedicated to improving the lives of pets and
-          their owners by offering reliable, comprehensive, and up-to-date
-          information.
+        <Typography mx={1} my={3}>
+          At the heart of our endeavor lies a profound dedication to enriching
+          the lives of pets and their devoted companions. Our mission transcends
+          mere service provision; it&apos;s a commitment to fostering a vibrant
+          community of pet enthusiasts united by their shared love and reverence
+          for their furry friends. We believe that pets are more than just
+          animals; they are cherished members of our families, imbuing our lives
+          with joy, companionship, and unwavering loyalty.
+          <br />
+          <br /> As such, we endeavor to provide nothing short of exceptional
+          care, ensuring that every pet receives the love, attention, and
+          support they deserve. Ultimately, our mission is simple yet profound:
+          to make a positive difference in the lives of pets and their owners. .
+          Welcome to our community, where every pet is cherished, and every pet
+          lover is embraced with open arms.
         </Typography>
       </Box>
       <Box marginTop={5} marginBottom={2}>
