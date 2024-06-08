@@ -95,7 +95,7 @@ const AllPets = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, gender, size, specialNeeds]);
-  console.log("pets: ", pets);
+  console.log("searchterm: ", searchTerm);
   console.log("needs: ", specialNeedsArray);
 
   return (
@@ -121,7 +121,7 @@ const AllPets = () => {
       </Typography>
       <Box
         display={"flex"}
-        flexDirection={{xs: "column", sm: "row", lg: "row"}}
+        flexDirection={{xs: "column", lg: "row"}}
         justifyContent="space-between"
       >
         <TextField

@@ -96,9 +96,10 @@ const EditPetData = ({petData, open, setOpen}: any) => {
       console.log("allurls: ", allImageUrls);
       setImageLoading(false);
     }
-    setLoading(true);
+
     /**************** endGenerating image urls************************* */
     try {
+      setLoading(true);
       const insertData = {
         specialNeeds: specialNeedArr,
         image: allImageUrls,
@@ -114,10 +115,12 @@ const EditPetData = ({petData, open, setOpen}: any) => {
         setOpen(false);
       } else {
         toast.error(res.message);
+        setLoading(false);
       }
     } catch (err: any) {
       console.log(err);
       toast.error(err.message as string);
+      setLoading(false);
     } finally {
       setLoading(false);
     }

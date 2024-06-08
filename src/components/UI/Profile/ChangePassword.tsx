@@ -39,11 +39,12 @@ const ChangePassword = () => {
 
   const onSubmit: SubmitHandler<any> = async data => {
     const accessToken = getFromCookiesClient(authKey);
-    setLoading(true);
+
     // console.log(data);
     const confirmed = confirm(`Are you sure you want to change password?`);
     if (confirmed) {
       try {
+        setLoading(true);
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/change-password`,
           {
@@ -142,7 +143,12 @@ const ChangePassword = () => {
                   message: "Password must be at most of 12 characters",
                 },
               })}
-            />
+            />{" "}
+            {errors.oldPassword && (
+              <span className="text-red-500 text-xs m-1">
+                {errors.oldPassword.message as string}
+              </span>
+            )}
             <TextField
               sx={{color: "white"}}
               id="standard-basic"
@@ -175,7 +181,12 @@ const ChangePassword = () => {
                   message: "New Password must be at most of 12 characters",
                 },
               })}
-            />
+            />{" "}
+            {errors.newPassword && (
+              <span className="text-red-500 text-xs m-1">
+                {errors.newPassword.message as string}
+              </span>
+            )}
             <Button
               sx={{
                 width: "200px",
