@@ -2,7 +2,7 @@ import {authKey} from "@/constants/authkey";
 import {getUserInfo, removeUser} from "@/services/auth.services";
 // import {getUserInfo, removeUser} from "@/services/actions/auth.services";
 import {AccountCircle} from "@mui/icons-material";
-import {Button} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {getCookie} from "cookies-next";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
@@ -22,6 +22,9 @@ const AuthButtons = () => {
     <>
       {userData?.id ? (
         <>
+          <Link href="/MyRequests">
+            <Typography>My Requests</Typography>
+          </Link>
           <Link href={"/MyProfile"}>
             <AccountCircle
               fontSize="large"
@@ -34,6 +37,7 @@ const AuthButtons = () => {
               }}
             />
           </Link>
+
           <Button
             sx={{backgroundColor: "secondary.dark"}}
             onClick={handleLogout}

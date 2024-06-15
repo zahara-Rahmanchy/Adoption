@@ -6,7 +6,12 @@ import type {NextRequest} from "next/server";
 type Role = keyof typeof roleBasedPrivateRoutes;
 
 const AuthRoutes = ["/Login", "/Register"];
-const commonPrivateRoutes = ["/MyProfile", "/PetPortfolio", "/AdoptionRequest"];
+const commonPrivateRoutes = [
+  "/MyProfile",
+  "/PetPortfolio",
+  "/AdoptionRequest",
+  "/MyRequests",
+];
 const roleBasedPrivateRoutes = {
   Admin: [/^\/Dashboard\/Admin/],
 };
@@ -59,6 +64,7 @@ export const config = {
     "/Login",
     "/Register",
     "/MyProfile",
+    "/MyRequests",
     "/Dashboard/:page*",
     "/PetPortfolio/:page*",
     "/AdoptionRequest/:page*",

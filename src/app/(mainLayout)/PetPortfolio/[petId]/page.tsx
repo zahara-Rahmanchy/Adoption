@@ -1,4 +1,5 @@
 import PetPortfolio from "@/components/UI/PetPortfolio/PetPortfolio";
+import CommonHeader from "@/components/shared/CommonHeader";
 import {petId} from "@/constants/PetId";
 import {authKey} from "@/constants/authkey";
 import {IApiResponse, IPetData} from "@/interfaces/PetInterface";
@@ -39,6 +40,7 @@ const PortfolioPage = async ({params}: petId) => {
 
   return (
     <>
+      <CommonHeader headerFirst="Our Pawf" headerSecond="ect Portfolio" />
       <PetPortfolio pet={petData as IPetData} error={error as string} />
     </>
   );

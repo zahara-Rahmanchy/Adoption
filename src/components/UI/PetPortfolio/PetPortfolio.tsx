@@ -267,7 +267,7 @@ const PetPortfolio = ({
               sx={{
                 marginTop: "30px",
                 textAlign: "center",
-                backgroundColor: "#fff4d9",
+                backgroundColor: "primary.light",
               }}
               // cols={3}
               // rowHeight={164}
@@ -282,8 +282,10 @@ const PetPortfolio = ({
                     alt={`${(pet.species, index)}`}
                     loading="lazy"
                     width={"400"}
-                    height={"00"}
+                    height={"100"}
                     style={{
+                      width: "300px",
+                      height: "200px",
                       textAlign: "center",
                       padding: "6px",
                       // borderColor: "#865C97",

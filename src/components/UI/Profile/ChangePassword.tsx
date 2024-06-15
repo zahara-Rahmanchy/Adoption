@@ -77,6 +77,7 @@ const ChangePassword = () => {
     <Box id="changePassword">
       <Typography
         width={"100%"}
+        mx={{sm: 4, xs: 2}}
         my={4}
         textAlign="left"
         variant="h4"
@@ -98,8 +99,9 @@ const ChangePassword = () => {
         width={"100%"}
         borderRadius={"20px"}
         marginBottom={10}
-        py={2}
+        py={{sm: 2, xs: 6}}
         minHeight={"200px"}
+        // alignItems={"center"}
         justifyContent={"center"}
       >
         <Backdrop
@@ -110,7 +112,13 @@ const ChangePassword = () => {
         </Backdrop>
         {/* <Stack id={"changePassword"} sx={{background: "#eed4f9"}} gap={5}> */}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack direction={{xs: "column", sm: "row"}} gap={4} mx={7}>
+          <Stack
+            direction={{xs: "column", sm: "row"}}
+            gap={4}
+            mx={7}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <TextField
               sx={{color: "white"}}
               id="standard-basic"
@@ -189,9 +197,10 @@ const ChangePassword = () => {
             )}
             <Button
               sx={{
+                px: "4",
                 width: "200px",
                 textAlign: "center",
-
+                mx: "auto 0",
                 bgcolor: "#865C97",
               }}
               type="submit"

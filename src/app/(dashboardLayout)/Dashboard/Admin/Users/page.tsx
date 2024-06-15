@@ -157,7 +157,7 @@ const UsersPage = () => {
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <Typography textAlign={"center"} fontSize={"12px"}>
-                    {value?.updatedAt as string}
+                    {new Date(value?.updatedAt as string).toLocaleString()}
                   </Typography>
                 </TableCell>
                 <TableCell component="th" scope="row">
